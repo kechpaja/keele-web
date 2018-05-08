@@ -1,8 +1,4 @@
-// TODO create <div id="waterfall-tile-container"></div>
-//
-//
 // TODO TODO TODO clean up this file!
-
 
 waterfall = (function () {
     var tickSize = 0.05; // Percentage of page height
@@ -11,9 +7,6 @@ waterfall = (function () {
     var imageHeight = 25; // Percentage of page height
 
     var lessonData = [];
-
-   // var imageContainer = document.getElementById("waterfall-tile-container")
-
 
     // Function to create image tile
     function createImageTile(src, id) { /// TODO will eventually take src as base64-encoded img, right?
@@ -26,8 +19,6 @@ waterfall = (function () {
         return image;
     }
 
-    //imageContainer.appendChild(image);
-
     function setupTiles() { // TODO fetch data from somewhere, eh?
         var imageContainer = document.getElementById("waterfall-tile-container");
         for (var i = 0; i < lessonData.length; i++) {
@@ -35,17 +26,6 @@ waterfall = (function () {
             imageContainer.appendChild(tile);
         }
     }
-
-
-    //while (parseInt(image.style.top) < 100) {
-    //    image.style.top = (parseInt(image.style.top) + 5) + "%";
-    //}
-
-    // XXX sleep function from https://stackoverflow.com/a/39914235
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
 
     // Function to advance a tile by one tick
     function advanceTile(tile, nextTile) {
@@ -78,7 +58,7 @@ waterfall = (function () {
                 lastTile = tiles[i];
             }
 
-            await sleep(tickLength);
+            await utils.sleep(tickLength);
         }
     }
 
