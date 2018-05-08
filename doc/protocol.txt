@@ -1,3 +1,13 @@
+ - Lesson Page
+
+{
+    "id" : "Some UID",
+    "title" : "Lesson Title",
+    "grammar" : "GRAMMAR PAGE AS STRING",
+    "waterfall" : true/false
+}
+
+
  - Waterfall Lesson
 
 JSON list:

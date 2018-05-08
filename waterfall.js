@@ -120,5 +120,5 @@ waterfall = (function () {
 
     return {
         init: init
-    }
+    };
 })();
