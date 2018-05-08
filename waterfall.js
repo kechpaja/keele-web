@@ -8,9 +8,12 @@ waterfall = (function () {
     var tickSize = 0.05; // Percentage of page height
     var tickLength = 5; // Milliseconds
 
-    var imageMaxHeight = 25; // Percentage of page height
+    var imageHeight = 25; // Percentage of page height
 
-   // var imageContainer = document.getElementById("waterfall-tile-container");
+    var lessonData = [];
+
+   // var imageContainer = document.getElementById("waterfall-tile-container")
+
 
     // Function to create image tile
     function createImageTile(src, id) { /// TODO will eventually take src as base64-encoded img, right?
@@ -18,7 +21,8 @@ waterfall = (function () {
         image.src = src; //"img/horn.jpg";
         image.id = id; 
         image.style = "position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, 0)";
-        image.style["max-height"] = imageMaxHeight + "%";
+        image.style["max-height"] = imageHeight + "%";
+        image.style["min-height"] = imageHeight + "%";
         return image;
     }
 
@@ -26,8 +30,9 @@ waterfall = (function () {
 
     function setupTiles() { // TODO fetch data from somewhere, eh?
         var imageContainer = document.getElementById("waterfall-tile-container");
-        for (var i = 0; i < 2; i++) {
-            imageContainer.appendChild(createImageTile("img/horn.jpg", "horn" + i));
+        for (var i = 0; i < lessonData.length; i++) {
+            var tile = createImageTile(lessonData[i]["image"], i);
+            imageContainer.appendChild(tile);
         }
     }
 
@@ -47,7 +52,7 @@ waterfall = (function () {
         var stoppingPoint = 0; // TODO top of nextTile if nextTile is not null, otherwise 0
 
         if (nextTile !== null) {
-            stoppingPoint = parseFloat(nextTile.style.bottom) + imageMaxHeight
+            stoppingPoint = parseFloat(nextTile.style.bottom) + imageHeight
         }
 
         var tileBottomPosition = parseFloat(tile.style.bottom);
@@ -93,7 +98,7 @@ waterfall = (function () {
             // Remove tile if answer is correct
             var container = document.getElementById("waterfall-tile-container");
             var tiles = container.getElementsByTagName("img");
-            if (tiles[0].id === text) { // TODO look up actual answers using ID
+            if (lessonData[parseInt(tiles[0].id)]["answers"].indexOf(text) > -1) {
                 tiles[0].remove();
             }
         }
@@ -120,8 +125,15 @@ waterfall = (function () {
         answerField.onkeypress = checkAnswer; // XXX does this work?
         anchorElement.appendChild(answerField);
 
+        fetch("waterfall-test-lesson.json")
+            .then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                lessonData = data;
+                setupTiles();
+            }); // TODO is that okay?
 
-       setupTiles();
+        //setupTiles();
     }
 
     return {

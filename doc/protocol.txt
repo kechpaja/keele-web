@@ -1,0 +1,11 @@
+ - Waterfall Lesson
+
+JSON list:
+
+[
+    {
+        "image" : "Base 64-encoded image",
+        "answers" : ["answer 1", "answer 2", "answer 3", ...]
+    },
+    ...
+]
