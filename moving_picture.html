@@ -1,0 +1,88 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id="image-container" />
+
+        <script type="text/javascript">
+            var tickSize = 0.05; // Percentage of page height
+            var tickLength = 5; // Milliseconds
+
+            var imageMaxHeight = 25; // Percentage of page height
+
+            var imageContainer = document.getElementById("image-container");
+
+            // Load and add image
+            var image = document.createElement("img");
+            image.src = "img/horn.jpg";
+            image.id = "horn"; 
+            image.style = "position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, 0)";
+            image.style["max-height"] = imageMaxHeight + "%";
+            imageContainer.appendChild(image);
+
+
+            //while (parseInt(image.style.top) < 100) {
+            //    image.style.top = (parseInt(image.style.top) + 5) + "%";
+            //}
+
+            // XXX sleep function from https://stackoverflow.com/a/39914235
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+
+            // Function to advance a tile by one tick
+            function advanceTile(tile, nextTile) {
+                var stoppingPoint = 0; // TODO top of nextTile if nextTile is not null, otherwise 0
+
+                if (nextTile !== null) {
+                    stoppingPoint = parseFloat(nextTile.style.bottom) + imageMaxHeight
+                }
+
+                var tileBottomPosition = parseFloat(tile.style.bottom);
+                if (tileBottomPosition > stoppingPoint) {
+                    tile.style.bottom = (tileBottomPosition - tickSize) + "%";
+                }
+            }
+
+            async function runWaterfall() {
+                // TODO set up win/lose conditions for while loop
+                while (true) {
+                    advanceTile(image, null); // TODO loop through list
+                    await sleep(tickLength);
+                }
+            }
+
+            //runWaterfall();
+
+
+            /*
+             * Scripts for removing a tile when the correct answer is given
+             */
+
+             function checkAnswer(e) {
+                if (e.keyCode == 13 || e.which == 13) {
+                    var answerElement = document.getElementById("answer-field");
+                    var text = answerElement.value;
+                    answerElement.value = "";
+
+                    // Remove tile if answer is correct
+                    var container = document.getElementById("image-container");
+                    var tiles = container.getElementsByTagName("img");
+                    if (tiles[0].id === text) {
+                        tiles[0].remove();
+                    }
+                }
+             }
+
+        </script>
+
+        <button onclick="javascript:runWaterfall()">Start</button>
+
+        <input type="text" id="answer-field" onkeypress="javascript:checkAnswer(event)" />
+
+        <!-- <img src="img/horn.jpg" style="position: absolute; left: 50%; top: 0%; transform: translate(-50%, -100%)"> -->
+    </body>
+</html>
