@@ -4,7 +4,7 @@
     </head>
 
     <body>
-        <div id="image-container" />
+        <div id="image-container"></div>
 
         <script type="text/javascript">
             var tickSize = 0.05; // Percentage of page height
@@ -14,13 +14,21 @@
 
             var imageContainer = document.getElementById("image-container");
 
-            // Load and add image
-            var image = document.createElement("img");
-            image.src = "img/horn.jpg";
-            image.id = "horn"; 
-            image.style = "position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, 0)";
-            image.style["max-height"] = imageMaxHeight + "%";
-            imageContainer.appendChild(image);
+            // Function to create image tile
+            function createImageTile(src, id) { /// TODO will eventually take src as base64-encoded img, right?
+                var image = document.createElement("img");
+                image.src = src; //"img/horn.jpg";
+                image.id = id; 
+                image.style = "position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, 0)";
+                image.style["max-height"] = imageMaxHeight + "%";
+                return image;
+            }
+
+            //imageContainer.appendChild(image);
+
+            for (var i = 0; i < 2; i++) {
+                imageContainer.appendChild(createImageTile("img/horn.jpg", "horn" + i));
+            }
 
 
             //while (parseInt(image.style.top) < 100) {
@@ -44,13 +52,25 @@
                 var tileBottomPosition = parseFloat(tile.style.bottom);
                 if (tileBottomPosition > stoppingPoint) {
                     tile.style.bottom = (tileBottomPosition - tickSize) + "%";
+                    return true;
                 }
+
+                return false;
             }
 
             async function runWaterfall() {
                 // TODO set up win/lose conditions for while loop
                 while (true) {
-                    advanceTile(image, null); // TODO loop through list
+                    var tiles = imageContainer.getElementsByTagName("img");
+                    var lastTile = null;
+                    for (var i = 0; i < tiles.length; i++) {
+                        if (advanceTile(tiles[i], lastTile)) {
+                            break;
+                        }
+
+                        lastTile = tiles[i];
+                    }
+
                     await sleep(tickLength);
                 }
             }
@@ -71,7 +91,7 @@
                     // Remove tile if answer is correct
                     var container = document.getElementById("image-container");
                     var tiles = container.getElementsByTagName("img");
-                    if (tiles[0].id === text) {
+                    if (tiles[0].id === text) { // TODO look up actual answers using ID
                         tiles[0].remove();
                     }
                 }
