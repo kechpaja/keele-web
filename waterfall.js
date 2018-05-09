@@ -1,4 +1,4 @@
-waterfall = (function () {
+(function () {
     var tickSize = 0.05; // Percentage of page height
     var tickLength = 5; // Milliseconds
 
