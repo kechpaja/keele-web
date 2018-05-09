@@ -12,11 +12,19 @@
 
 
     function assemblePage() {
-        document.getElementById("title").innerHTML = lessonData["title"];
+        var anchor = document.getElementById("anchor");
+        anchor.innerHTML = "";
 
-        var lessonList = document.getElementById("lesson-list");
+        var title = document.createElement("h1");
+        title.id = "title";
+        title.innerHTML = lessonData["title"];
+        anchor.appendChild(title);
 
-        // TODO grammar and vocab pages
+        var lessonList = document.createElement("table");
+        lessonList.id = "lesson-list";
+        anchor.appendChild(lessonList);
+
+        // TODO vocab page and other games
         //
         // TODO localize page name
         if (lessonData["grammar"]) {
