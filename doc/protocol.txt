@@ -3,8 +3,8 @@
 {
     "id" : "Some UID",
     "title" : "Lesson Title",
-    "grammar" : "GRAMMAR PAGE AS STRING",
-    "waterfall" : true/false
+    "grammar" : "grammar page URL",
+    "waterfall" : "waterfall data URL"
 }
 
 

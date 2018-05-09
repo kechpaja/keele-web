@@ -22,17 +22,19 @@ lesson = (function () {
                 return response.json();
             }).then(function(data) {
                 lessonData = data;
+
+                var anchor = utils.getAnchor();
+
+                // TODO formatting. Put this stuff in other function?
+                //anchor.appendChild(utils.createElement("h1", lessonData["title"]));
+                document.getElementById("title").innerHTML = lessonData["title"];
+
+                // TODO localize name
+                // TODO only do this if there is indeed a waterfall provided. 
+                anchor.appendChild(createLinkToSection("Waterfall", function () {
+                    location.href = "waterfall.html?data=" + lessonData["waterfall"];
+                }));
             });
-
-        var anchor = utils.getAnchor();
-
-        anchor.appendChild(utils.createElement("h1", lessonData["title"]));
-
-        // TODO localize name
-        anchor.appendChild(createLinkToSection("Waterfall", function () {
-            waterfall.init(); // TODO will probably have to pass arg in future
-        }));
-
     }
 
     return {

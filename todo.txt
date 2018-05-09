@@ -1,5 +1,7 @@
  () win/lose conditions for waterfall game
 
+ () stop and/or pause buttons for waterfall game
+
  - Questions
 
 Do we want to be fetching each part of a lesson in that part, or should we
@@ -7,3 +9,13 @@ fetch everything at once and pass JSON objects to the init functions?
 
 For now, we're doing the former, although grammar may end up being the latter.
 I'm probably in favor of the latter in the long run. 
+
+
+
+Consider factoring the waterfall game out into a separate page, which just
+takes a url parameter to load its data from.
+
+
+I did that. For the time being, the URLs will look a bit ugly, but they will
+function. Eventually we will replace most of these pages with RESTful
+endpoints that are prettier, so don't worry about it right now. 

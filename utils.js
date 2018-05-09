@@ -1,11 +1,4 @@
 utils = (function () {
-    // Sleep function from https://stackoverflow.com/a/39914235
-    // Caller must be async
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-
     // Get the anchor tag from the DOM
     function getAnchor() {
         return document.getElementById("anchor");
@@ -26,7 +19,6 @@ utils = (function () {
 
     return {
         createElement: createElement,
-        getAnchor: getAnchor,
-        sleep: sleep
+        getAnchor: getAnchor
     }
 })();
