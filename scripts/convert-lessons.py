@@ -40,48 +40,53 @@ srcdir = sys.argv[1]
 destdir = sys.argv[2]
 
 
-# get items
-items = getjson(srcdir + "/items.json")
+# Move images
+os.makedirs(destdir + "/images")
+images = os.listdir(srcdir + "/images")
+for image in images:
+    shutil.copy2(srcdir + "/images/" + image, destdir + "/images")
+
+for lang in os.listdir(srcdir):
+    if lang == "images": # images are not a lesson pack
+        continue
+
+    langsrcdir = srcdir + "/" + lang + "/"
+
+    # get items
+    items = getjson(langsrcdir + "items.json")
+
+    # get list of lessons
+    lessons = getjson(langsrcdir+ "lessons.json")
+
+    for lesson in lessons:
+        lessonData = getjson(langsrcdir + "lessons/" + lesson + ".json")
+
+        # save grammar page separately
+        lessondir = lang + "/lessons/" + lesson
+        os.makedirs(destdir + "/" + lessondir)
+        savejson(destdir + "/"+lessondir + "/grammar.json", lessonData["grammar"])
+
+        # create waterfall data object
+        temp = {}
+        for item in lessonData["items"]:
+            for image in items[item]["images"]:
+                if image in temp:
+                    temp[image].append(items[item]["item"])
+                else:
+                    temp[image] = [items[item]["item"]]
+        waterfalldata = []
+        for image in temp:
+            waterfalldata.append({"image" : "images/" + image, 
+                                  "answers" : temp[image]})
+        savejson(destdir + "/" + lessondir + "/waterfall.json", waterfalldata)
+
+        # create lesson page object and save
+        lessonPageObject = {"title" : lessonData["title"],
+                            "grammar" : lessondir + "/grammar.json",
+                            "waterfall" : lessondir + "/waterfall.json"}
+        savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
 
 
-# get list of lessons
-lessons = getjson(srcdir + "/lessons.json")
+        # TODO eventually create vocab page (we need to know what it looks like)
 
-for lesson in lessons:
-    lessonData = getjson(srcdir + "/lessons/" + lesson + ".json")
-
-    # save grammar page separately
-    lessondir = "lessons/" + lesson
-    os.makedirs(destdir + "/" + lessondir)
-    savejson(destdir + "/"+lessondir + "/grammar.json", lessonData["grammar"])
-
-    # Move all requested images to proper dir
-    os.makedirs(destdir + "/images")
-    images = os.listdir(srcdir + "/images")
-    for image in images:
-        shutil.copy2(srcdir + "/images/" + image, destdir + "/images")
-
-    # create waterfall data object
-    temp = {}
-    for item in lessonData["items"]:
-        for image in items[item]["images"]:
-            if image in temp:
-                temp[image].append(items[item]["item"])
-            else:
-                temp[image] = [items[item]["item"]]
-    waterfalldata = []
-    for image in temp:
-        waterfalldata.append({"image" : "images/" + image, 
-                              "answers" : temp[image]})
-    savejson(destdir + "/" + lessondir + "/waterfall.json", waterfalldata)
-
-    # create lesson page object and save
-    lessonPageObject = {"title" : lessonData["title"],
-                        "grammar" : lessondir + "/grammar.json",
-                        "waterfall" : lessondir + "/waterfall.json"}
-    savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
-
-
-    # TODO eventually create vocab page (we need to know what it looks like)
-
-    # TODO copy audio as well at some point?
+        # TODO copy audio as well at some point?

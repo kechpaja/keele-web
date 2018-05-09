@@ -15,7 +15,7 @@
     // Function to create image tile
     function createImageTile(src, id) {
         var image = document.createElement("img");
-        image.src = src;
+        image.src = "data/" + src; // TODO some better way?
         image.id = id; 
         image.style.position = "absolute";
         image.style.left = "50%";
@@ -113,7 +113,7 @@
         var unsafeUrl = location.href.split("?")[1].split("=")[1];
 
         // TODO error checking if resource doesn't exist
-        fetch(decodeURIComponent(unsafeUrl))
+        fetch("data/" + decodeURIComponent(unsafeUrl))
             .then(function(response) {
                 return response.json();
             }).then(function(data) {

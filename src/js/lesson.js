@@ -39,7 +39,7 @@
         var unsafeUrl = location.href.split("?")[1].split("=")[1];
 
         // TODO error handling
-        fetch(decodeURIComponent(unsafeUrl))
+        fetch("data/" + decodeURIComponent(unsafeUrl))
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
