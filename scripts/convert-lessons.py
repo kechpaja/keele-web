@@ -83,9 +83,11 @@ for lang in os.listdir(srcdir):
         savejson(destdir + "/" + lessondir + "/waterfall.json", waterfalldata)
 
         # create lesson page object and save
+        grammar = ["grammar"] if "grammar" in lessonData else []
+        # TODO as we get more activities, make sure we accurately determine
+        # TODO which ones are actually supported
         lessonPageObject = {"title" : lessonData["title"],
-                            "grammar" : lessondir + "/grammar.json",
-                            "waterfall" : lessondir + "/waterfall.json"}
+                            "activities" : grammar + ["waterfall"]}
         savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
 
 

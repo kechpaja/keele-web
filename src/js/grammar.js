@@ -4,7 +4,6 @@ var pages = pages || {};
     
     var data = [];
 
-
     function assemblePage() {
         // Create title and grammar-sections elements
         var anchor = document.getElementById("anchor");
@@ -28,9 +27,6 @@ var pages = pages || {};
 
 
     function init(language, lesson) {
-        // TODO find a better way to do this!
-        //var unsafeUrl = location.href.split("?")[1].split("=")[1];
-
         // TODO error handling: fall back to nearest lesson page?
         fetch("data/" + language + "/lessons/" + lesson + "/grammar.json")
             .then(function(response) {

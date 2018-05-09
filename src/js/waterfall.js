@@ -122,11 +122,6 @@ var pages = pages || {};
         answerField.onkeypress = checkAnswer;
         anchor.appendChild(answerField);
 
-
-        // Fetch data url from query string
-        // TODO this is *very* hacky. Write something nicer later. 
-        //var unsafeUrl = location.href.split("?")[1].split("=")[1];
-
         // TODO error checking if resource doesn't exist
         fetch("data/" + language + "/lessons/" + lesson + "/waterfall.json")
             .then(function(response) {
