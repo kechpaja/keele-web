@@ -12,9 +12,11 @@ var navigate = (function () {
     }
 
     function to(language, lesson, section) {
+        var destination = [language, lesson, section];
+
         // TODO replace that null?
-        history.pushState(arguments, null, arguments.join("/"));
-        loadPage.apply(this, arguments);
+        history.pushState(destination, null, destination.join("/"));
+        loadPage.apply(this, destination);
     }
 
 
