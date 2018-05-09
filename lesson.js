@@ -33,13 +33,20 @@
 
     function init() {
         // TODO cache this, or at least only do it if it hasn't alreay happened
-        fetch("test-lesson.json")
+        //
+        // Fetch data url from query string
+        // TODO this is *very* hacky. Write something nicer later. 
+        var unsafeUrl = location.href.split("?")[1].split("=")[1];
+
+        fetch(decodeURIComponent(unsafeUrl))
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
                 lessonData = data;
                 assemblePage();
             });
+
+        // TODO show a spinner or something
     }
 
     init();

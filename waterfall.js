@@ -110,6 +110,7 @@
         // TODO this is *very* hacky. Write something nicer later. 
         var unsafeUrl = location.href.split("?")[1].split("=")[1];
 
+        // TODO error checking if resource doesn't exist
         fetch(decodeURIComponent(unsafeUrl))
             .then(function(response) {
                 return response.json();
