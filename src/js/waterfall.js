@@ -100,12 +100,25 @@
 
     // Called when switching context to waterfall
     function init() {
-        var startButton = document.getElementById(ids.startButton);
+        var anchor = document.getElementById("anchor");
+        anchor.innerHTML = "";
+
+        var tileContainer = document.createElement("div");
+        tileContainer.id = ids.tileContainer
+        anchor.appendChild(tileContainer);
+
+
+        var startButton = document.createElement("button");
+        startButton.id = ids.startButton;
         startButton.innerHTML = "Start"; // TODO localize
         startButton.onclick = runWaterfall;
+        anchor.appendChild(startButton);
 
-        var answerField = document.getElementById(ids.answerField);
+        var answerField = document.createElement("input");
+        answerField.type = "text";
+        answerField.id = ids.answerField;
         answerField.onkeypress = checkAnswer;
+        anchor.appendChild(answerField);
 
 
         // Fetch data url from query string

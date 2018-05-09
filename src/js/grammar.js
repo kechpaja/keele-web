@@ -6,6 +6,7 @@
     function assemblePage() {
         // Create title and grammar-sections elements
         var anchor = document.getElementById("anchor");
+        anchor.innerHTML = "";
         
         var title = document.createElement("h1");
         title.id = "title";
