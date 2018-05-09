@@ -15,6 +15,8 @@
         document.getElementById("title").innerHTML = lessonData["title"];
 
         var lessonList = document.getElementById("lesson-list");
+
+        // TODO grammar and vocab pages
        
        // TODO localize page name
         if (lessonData["waterfall"]) {
