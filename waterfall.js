@@ -5,8 +5,9 @@ waterfall = (function () {
     var imageHeight = 25; // Percentage of page height
 
     var ids = {
-        answerField: "waterfall-answer-field",
-        tileContainer: "waterfall-tile-container"
+        answerField: "answer-field",
+        startButton: "start-button",
+        tileContainer: "tile-container"
     };
 
     var lessonData = [];
@@ -50,6 +51,12 @@ waterfall = (function () {
         return false;
     }
 
+    // Sleep function from https://stackoverflow.com/a/39914235
+    // Caller must be async
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     async function runWaterfall() {
         // TODO set up win/lose conditions for while loop
         var imageContainer = document.getElementById(ids.tileContainer);
@@ -64,7 +71,7 @@ waterfall = (function () {
                 lastTile = tiles[i];
             }
 
-            await utils.sleep(tickLength);
+            await sleep(tickLength);
         }
     }
 
@@ -91,24 +98,14 @@ waterfall = (function () {
 
     // Called when switching context to waterfall
     function init() {
-        var anchorElement = document.getElementById("anchor");
-        anchorElement.innerHTML = "";
-
-        var waterfallTileContainer = document.createElement("div");
-        waterfallTileContainer.id = ids.tileContainer;
-        anchorElement.appendChild(waterfallTileContainer);
-
-        var startButton = document.createElement("button");
+        var startButton = document.getElementById(ids.startButton);
         startButton.innerHTML = "Start"; // TODO localize
         startButton.onclick = runWaterfall;
-        anchorElement.appendChild(startButton);
 
-        var answerField = document.createElement("input");
-        answerField.type = "text";
-        answerField.id = ids.answerField;
+        var answerField = document.getElementById(ids.answerField);
         answerField.onkeypress = checkAnswer;
-        anchorElement.appendChild(answerField);
 
+        // TODO decode this from url
         fetch("waterfall-test-lesson.json")
             .then(function(response) {
                 return response.json();
@@ -118,7 +115,5 @@ waterfall = (function () {
             });
     }
 
-    return {
-        init: init
-    };
+    init();
 })();
