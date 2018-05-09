@@ -1,4 +1,4 @@
-(function () {
+grammar = (function () {
     
     var data = [];
 
@@ -25,12 +25,12 @@
     }
 
 
-    function init() {
+    function init(language, lesson) {
         // TODO find a better way to do this!
-        var unsafeUrl = location.href.split("?")[1].split("=")[1];
+        //var unsafeUrl = location.href.split("?")[1].split("=")[1];
 
-        // TODO error handling
-        fetch("data/" + decodeURIComponent(unsafeUrl))
+        // TODO error handling: fall back to nearest lesson page?
+        fetch("data/" + language + "/lessons/" + lesson + "/grammar.json")
             .then(function(response) {
                 return response.json();
             }).then(function(jsonData) {
@@ -39,5 +39,7 @@
             });
     }
 
-    init();
+    return {
+        init: init
+    }
 })();

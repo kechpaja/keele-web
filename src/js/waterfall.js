@@ -1,4 +1,4 @@
-(function () {
+waterfall = (function () {
     var tickSize = 0.05; // Percentage of page height
     var tickLength = 5; // Milliseconds
 
@@ -99,7 +99,7 @@
 
 
     // Called when switching context to waterfall
-    function init() {
+    function init(language, lesson) {
         var anchor = document.getElementById("anchor");
         anchor.innerHTML = "";
 
@@ -123,10 +123,10 @@
 
         // Fetch data url from query string
         // TODO this is *very* hacky. Write something nicer later. 
-        var unsafeUrl = location.href.split("?")[1].split("=")[1];
+        //var unsafeUrl = location.href.split("?")[1].split("=")[1];
 
         // TODO error checking if resource doesn't exist
-        fetch("data/" + decodeURIComponent(unsafeUrl))
+        fetch("data/" + language + "/lessons/" + lesson + "/waterfall.json")
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
@@ -135,5 +135,7 @@
             });
     }
 
-    init();
+    return {
+        init: init
+    }
 })();

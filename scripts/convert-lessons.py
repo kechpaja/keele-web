@@ -56,9 +56,11 @@ for lang in os.listdir(srcdir):
     items = getjson(langsrcdir + "items.json")
 
     # get list of lessons
-    lessons = getjson(langsrcdir+ "lessons.json")
+    index = getjson(langsrcdir + "index.json")
 
-    for lesson in lessons:
+    # TODO copy over index of lessons. Also create index of languages. 
+
+    for lesson in index["lessons"]:
         lessonData = getjson(langsrcdir + "lessons/" + lesson + ".json")
 
         # save grammar page separately
