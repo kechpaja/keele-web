@@ -4,9 +4,18 @@
 
 
     function assemblePage() {
-        document.getElementById("title").innerHTML = data["title"];
+        // Create title and grammar-sections elements
+        var anchor = document.getElementById("anchor");
+        
+        var title = document.createElement("h1");
+        title.id = "title";
+        title.innerHTML = data["title"];
+        anchor.appendChild(title);
 
-        var sections = document.getElementById("grammar-sections");
+        var sections = document.createElement("div");
+        sections.id = "grammar-sections";
+        anchor.appendChild(sections);
+
         data["sections"].forEach(function(sec) {
             var div = document.createElement("div");
             div.innerHTML = "<h2>" + sec["heading"] + "</h2>" + sec["content"];
