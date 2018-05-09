@@ -20,7 +20,7 @@
         //
         // TODO localize page name
         if (lessonData["grammar"]) {
-            var href = lessonData["grammar"];
+            var href = "grammar.html?data=" + lessonData["grammar"];
             lessonList.appendChild(createLinkToSection("Grammar", href));
         }
        
@@ -38,6 +38,7 @@
         // TODO this is *very* hacky. Write something nicer later. 
         var unsafeUrl = location.href.split("?")[1].split("=")[1];
 
+        // TODO error handling
         fetch(decodeURIComponent(unsafeUrl))
             .then(function(response) {
                 return response.json();

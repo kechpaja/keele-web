@@ -26,7 +26,6 @@ JSON list:
 
 {
     "title" : "Grammar Page Title",
-    "intro" : "short intro to section",
     "sections" : [X, ...]
 }
 

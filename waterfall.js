@@ -28,6 +28,8 @@
 
     function setupTiles() {
         var imageContainer = document.getElementById(ids.tileContainer);
+
+        // TODO scramble tiles beforehand
         for (var i = 0; i < lessonData.length; i++) {
             var tile = createImageTile(lessonData[i]["image"], i);
             imageContainer.appendChild(tile);
