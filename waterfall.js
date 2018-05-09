@@ -105,8 +105,12 @@ waterfall = (function () {
         var answerField = document.getElementById(ids.answerField);
         answerField.onkeypress = checkAnswer;
 
-        // TODO decode this from url
-        fetch("waterfall-test-lesson.json")
+
+        // Fetch data url from query string
+        // TODO this is *very* hacky. Write something nicer later. 
+        var unsafeUrl = location.href.split("?")[1].split("=")[1];
+
+        fetch(decodeURIComponent(unsafeUrl))
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
