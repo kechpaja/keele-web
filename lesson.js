@@ -17,6 +17,12 @@
         var lessonList = document.getElementById("lesson-list");
 
         // TODO grammar and vocab pages
+        //
+        // TODO localize page name
+        if (lessonData["grammar"]) {
+            var href = lessonData["grammar"];
+            lessonList.appendChild(createLinkToSection("Grammar", href));
+        }
        
        // TODO localize page name
         if (lessonData["waterfall"]) {

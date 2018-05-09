@@ -19,3 +19,20 @@ JSON list:
     },
     ...
 ]
+
+
+
+ - Grammar Page
+
+{
+    "title" : "Grammar Page Title",
+    "intro" : "short intro to section",
+    "sections" : [X, ...]
+}
+
+
+X = {"heading" : "Section Heading", "sections" : ["paragraph", ...]}
+
+There may be room for larger divisions higher up, but add them later.
+
+Though for starters, we can just have them be HTML pages. 

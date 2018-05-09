@@ -2,6 +2,8 @@
 
  () stop and/or pause buttons for waterfall game
 
+ () Figure out vocab page, from ground zero. 
+
  - Questions
 
 Do we want to be fetching each part of a lesson in that part, or should we
