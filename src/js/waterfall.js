@@ -1,4 +1,6 @@
-waterfall = (function () {
+var pages = pages || {};
+
+(function () {
     var tickSize = 0.05; // Percentage of page height
     var tickLength = 5; // Milliseconds
 
@@ -135,7 +137,5 @@ waterfall = (function () {
             });
     }
 
-    return {
-        init: init
-    }
+    pages.waterfall = init;
 })();

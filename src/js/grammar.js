@@ -1,4 +1,6 @@
-grammar = (function () {
+var pages = pages || {};
+
+(function () {
     
     var data = [];
 
@@ -39,7 +41,5 @@ grammar = (function () {
             });
     }
 
-    return {
-        init: init
-    }
+    pages.grammar = init;
 })();

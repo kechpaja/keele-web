@@ -1,11 +1,21 @@
-lesson = (function () {
+var pages = pages || {};
+
+(function () {
 
     var data = [];
 
     // Returns a table row containing a link
-    function createLinkToSection(name, href) {
+    function createLinkToSection(name, onclick) {
+        var link = document.createElement("a");
+        link.onclick = onclick;
+        link.innerHTML = name;
+        link.href = "javascript:void(0);";
+
+        var column = document.createElement("td");
+        column.appendChild(link);
+
         var row = document.createElement("tr");
-        row.innerHTML = "<td><a href=\"" + href + "\">" + name + "</a></td>";
+        row.appendChild(column);
         return row;
     }
 
@@ -28,14 +38,18 @@ lesson = (function () {
         // TODO load these pages using JS, not links! Use history API!
         // TODO localize page name
         if (data["grammar"]) {
-            var href = data.language + "/" + data.lesson + "/grammar";
-            lessonList.appendChild(createLinkToSection("Grammar", href));
+            //var href = data.language + "/" + data.lesson + "/grammar";
+            lessonList.appendChild(createLinkToSection("Grammar", function() {
+                navigate.to(data.language, data.lesson, "grammar");
+            }));
         }
        
        // TODO localize page name
         if (data["waterfall"]) {
             var href = data.language + "/" + data.lesson + "/waterfall";
-            lessonList.appendChild(createLinkToSection("Waterfall", href));
+            lessonList.appendChild(createLinkToSection("Waterfall", function() {
+                navigate.to(data.language, data.lesson, "waterfall");
+            }));
         }
     }
 
@@ -60,7 +74,5 @@ lesson = (function () {
         // TODO show a spinner or something
     }
 
-    return {
-        init: init
-    }
+    pages.lesson = init;
 })();
