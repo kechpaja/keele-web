@@ -6,6 +6,11 @@
 
  - Questions
 
-Should lesson ids be array indicies? Probably not. 
+What other games should we have? I have an idea for one other: select the
+correct picture given a word, possibly with a time limit. This could also be
+arranged as a waterfall. 
 
-We will need to edit the script to move names into index. 
+We will also have to have the vocabulary page with items, pictures, and audio. 
+
+Perhaps a game where the user has to identify a word from the audio only. One
+where they have to type, and another where they have to select a picture. 

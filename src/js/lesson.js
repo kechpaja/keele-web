@@ -4,6 +4,11 @@ var pages = pages || {};
 
     var data = {};
 
+    var ids = {
+        sectionList: "section-list",
+        title: "lesson-title"
+    };
+
     // Returns a table row containing a link
     function createLink(name, onclick) {
         var link = document.createElement("a");
@@ -20,17 +25,9 @@ var pages = pages || {};
     }
 
     function assemblePage() {
-        var anchor = document.getElementById("anchor");
-        anchor.innerHTML = "";
+        utils.clearAnchor();
 
-        var title = document.createElement("h1");
-        title.id = "title";
-        title.innerHTML = data["title"];
-        anchor.appendChild(title);
-
-        var lessonList = document.createElement("table");
-        lessonList.id = "lesson-list";
-        anchor.appendChild(lessonList);
+        utils.anchor().appendChild(utils.createTitle(ids.title, data["title"]));
 
         // TODO vocab page and other games
         // TODO localize page names
@@ -39,11 +36,16 @@ var pages = pages || {};
             "waterfall" : "Waterfall"
         };
 
-        data["activities"].forEach(function(activity) {
-            lessonList.appendChild(createLink(pageNames[activity], function() {
-                navigate.to(data.language, data.lesson, activity);
-            }));
-        });
+        utils.anchor().appendChild(
+            utils.createLinkTable(
+                ids.sectionList,
+                data["activities"],
+                function (item) { return pageNames[item]; },
+                function (item) {
+                    return function () { 
+                        navigate.to(data.language, data.lesson, item);
+                    }
+                }));
     }
 
     function init(language, lesson) {
