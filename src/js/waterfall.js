@@ -63,6 +63,12 @@ var pages = pages || {};
     }
 
     async function runWaterfall() {
+        // Get rid of the start button
+        document.getElementById(ids.startButton).remove();
+
+        // Focus the answer field
+        document.getElementById(ids.answerField).focus();
+
         // TODO set up win/lose conditions for while loop
         var imageContainer = document.getElementById(ids.tileContainer);
         while (true) {
