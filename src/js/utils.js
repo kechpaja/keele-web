@@ -29,9 +29,9 @@ var utils = (function () {
     }
 
     function createTitle(id, title) {
-        var titleElement = document.createElement("h1");
-        titleElement.id = id;
-        titleElement.innerHTML = title;
+        var titleElement = document.createElement("div");
+        titleElement.id = id + "-container";
+        titleElement.innerHTML = "<h1 id=\"" + id + "\">" + title + "</h1>";
         return titleElement;
     }
 

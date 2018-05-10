@@ -1,0 +1,44 @@
+#answer-field {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
+    max-width: 30em;
+    border-width: thick;
+    border-color: blue;
+    border-style: solid;
+}
+
+#tile-container {
+    min-height: 100%;
+    margin-bottom: -2em;
+}
+
+#start-button {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    max-width: 30em;
+    height: 100%;
+    max-height: 20em;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: limegreen;
+}
+
+#start-button-text {
+    color: blue;
+    font-size: 3em;
+}
+
+/* TODO start button 
+ *
+ * We need to make it large and visible in the center of the page, and then
+ * use JavaScript to get rid of it once it's been pressed. 
+ *
+ * Consider also quickly toggling the styling of the answer field's borders
+ * when the user gets an answer right or wrong.
+ *
+ *
+ * This page also needs stop and back buttons. 
+ */

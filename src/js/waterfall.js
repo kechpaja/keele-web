@@ -9,6 +9,7 @@ var pages = pages || {};
     var ids = {
         answerField: "answer-field",
         startButton: "start-button",
+        startButtonText: "start-button-text",
         tileContainer: "tile-container"
     };
 
@@ -112,7 +113,8 @@ var pages = pages || {};
 
         var startButton = document.createElement("button");
         startButton.id = ids.startButton;
-        startButton.innerHTML = "Start"; // TODO localize
+        startButton.innerHTML = "<div id=\"" + ids.startButtonText + "\">"
+                                   + "Start" + "</div>"; // TODO localize
         startButton.onclick = runWaterfall;
         anchor.appendChild(startButton);
 
