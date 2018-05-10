@@ -7,11 +7,14 @@
     border-width: thick;
     border-color: blue;
     border-style: solid;
+    height: 2em;
 }
 
 #tile-container {
+    position: relative;
     min-height: 100%;
     margin-bottom: -2em;
+    bottom: 2em;
 }
 
 #start-button {
