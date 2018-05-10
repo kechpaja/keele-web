@@ -2,7 +2,10 @@
 
  () stop and/or pause buttons for waterfall game
 
- () Figure out vocab page, from ground zero. 
+ () Figure out vocab page, from ground zero.
+
+ () Scaling of waterfall page on mobile, so that it doesn't get
+    blown out of proporition when the user opens their keyboard
 
  - Questions
 
