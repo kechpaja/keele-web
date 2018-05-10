@@ -2,21 +2,43 @@ var pages = pages || {};
 
 var navigate = (function () {
 
+    function destinationArray(language, lesson, section) {
+        if (!language) {
+            return [];
+        }
+
+        if (!lesson) {
+            return [language];
+        }
+
+        if (!section) {
+            return [language, lesson];
+        }
+
+        return [language, lesson, section];
+    }
+
     function loadPage(language, lesson, section) {
-        if (language && lesson) {
+        if (lesson) {
             (pages[section] || pages["lesson"])(language, lesson);
-        } 
+            return;
+        }
+
+        if (language) {
+            pages["course"](language);
+            return;
+        }
 
         // TODO handle cases without lesson or language
-        // TODO this will mean writing index pages
+        // TODO this will mean writing the index home page
     }
 
     function to(language, lesson, section) {
-        var destination = [language, lesson, section];
+        var destination = destinationArray(language, lesson, section);
 
         // TODO replace that null?
         history.pushState(destination, null, destination.join("/"));
-        loadPage.apply(this, destination);
+        loadPage(language, lesson, section);
     }
 
 

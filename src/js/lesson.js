@@ -2,7 +2,7 @@ var pages = pages || {};
 
 (function () {
 
-    var data = [];
+    var data = {};
 
     // Returns a table row containing a link
     function createLink(name, onclick) {

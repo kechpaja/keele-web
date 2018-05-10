@@ -46,6 +46,8 @@ images = os.listdir(srcdir + "/images")
 for image in images:
     shutil.copy2(srcdir + "/images/" + image, destdir + "/images")
 
+# TODO create index of languages
+
 for lang in os.listdir(srcdir):
     if lang == "images": # images are not a lesson pack
         continue
@@ -55,18 +57,26 @@ for lang in os.listdir(srcdir):
     # get items
     items = getjson(langsrcdir + "items.json")
 
+    # Copy index of lessons
+    #os.makedirs(destdir + "/" + lang)
+    #shutil.copy2(langsrcdir + "index.json", destdir + "/" + lang)
+
     # get list of lessons
     index = getjson(langsrcdir + "index.json")
 
-    # TODO copy over index of lessons. Also create index of languages. 
-
+    # Start creating new index
+    newindex = {"title" : index["title"], "lessons" : []}
+    
     for lesson in index["lessons"]:
         lessonData = getjson(langsrcdir + "lessons/" + lesson + ".json")
+
+        # Get title for index
+        newindex["lessons"].append({"id":lesson, "title":lessonData["title"]})
 
         # save grammar page separately
         lessondir = lang + "/lessons/" + lesson
         os.makedirs(destdir + "/" + lessondir)
-        savejson(destdir + "/"+lessondir + "/grammar.json", lessonData["grammar"])
+        savejson(destdir+"/"+lessondir+"/grammar.json",lessonData["grammar"])
 
         # create waterfall data object
         temp = {}
@@ -94,3 +104,6 @@ for lang in os.listdir(srcdir):
         # TODO eventually create vocab page (we need to know what it looks like)
 
         # TODO copy audio as well at some point?
+
+    # Save new index
+    savejson(destdir + "/" + lang + "/index.json", newindex)

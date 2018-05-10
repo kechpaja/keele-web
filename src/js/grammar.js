@@ -2,7 +2,7 @@ var pages = pages || {};
 
 (function () {
     
-    var data = [];
+    var data = {};
 
     function assemblePage() {
         // Create title and grammar-sections elements
