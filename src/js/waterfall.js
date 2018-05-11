@@ -1,4 +1,4 @@
-var pages = pages || {};
+var games = games || {};
 
 (function () {
     var tickSize = 0.05; // Percentage of page height
@@ -141,5 +141,5 @@ var pages = pages || {};
             });
     }
 
-    pages.waterfall = init;
+    games.waterfall = init;
 })();

@@ -23,16 +23,16 @@ var navigate = (function () {
                              // we're navigating somewhere else.
 
         if (lesson) {
-            (pages[section] || pages["lesson"])(course, lesson);
+            (pages[section] || games[section] || pages.lesson)(course, lesson);
             return;
         }
 
         if (course) {
-            pages["course"](course);
+            pages.course(course);
             return;
         }
 
-        pages["home"]();
+        pages.home();
     }
 
     function to(course, lesson, section) {
@@ -50,8 +50,6 @@ var navigate = (function () {
 
         // TODO something in place of that null?
         history.replaceState(currentPathSplit, null, currentPath);
-
-        // TODO do we want to show some title ASAP here? 
         loadPage.apply(this, currentPathSplit); 
     }
 
