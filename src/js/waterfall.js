@@ -16,7 +16,8 @@ var games = games || {};
     var lessonData = [];
 
     function setupTiles() {
-        var container = document.getElementById(ids.tileContainer);
+        var container = utils.get(ids.tileContainer);
+        container.innerHTML = ""; // Make sure container is clear
 
         // TODO scramble tiles beforehand
         for (var i = 0; i < lessonData.length; i++) {
@@ -55,7 +56,7 @@ var games = games || {};
     }
 
     async function runWaterfall() {
-        document.getElementById(ids.startButton).style.display = "none";
+        utils.hide(ids.startButton);
 
         // Focus the answer field
         document.getElementById(ids.answerField).focus();
@@ -105,6 +106,7 @@ var games = games || {};
         utils.show("waterfall-anchor");
         
         var startButton = utils.get(ids.startButton);
+        utils.show(startButton);
         // TODO localize!
         startButton.getElementsByTagName("div")[0].innerHTML = "Start";
         startButton.onclick = runWaterfall;
