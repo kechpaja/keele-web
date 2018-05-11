@@ -1,7 +1,6 @@
 var pages = pages || {};
 
 (function () {
-
     var ids = {
         courseList: "home-course-list"
     };
@@ -25,7 +24,7 @@ var pages = pages || {};
     }
 
     function init() {
-        load.home(assemblePage);
+        load.load(assemblePage);
     }
 
     pages.home = init;

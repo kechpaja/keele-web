@@ -1,7 +1,6 @@
 var pages = pages || {};
 
 (function () {
-
     var ids = {
         sectionList: "section-list"
     };
@@ -33,7 +32,7 @@ var pages = pages || {};
     }
 
     function init(course, lesson) {
-        load.lesson(course, lesson, assemblePage);
+        load.load(assemblePage, course, lesson);
     }
 
     pages.lesson = init;

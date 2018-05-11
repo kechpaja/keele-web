@@ -77,7 +77,7 @@ for lang in os.listdir(srcdir):
     courseindex.append({"id" : lang, "title" : index["title"]})
 
     # Start creating new index
-    newindex = {"title" : index["title"], "lessons" : []}
+    newindex = {"title" : index["title"], "course" : lang, "lessons" : []}
     
     for lesson in index["lessons"]:
         lessonData = getjson(langsrcdir + "lessons/" + lesson + ".json")
@@ -113,7 +113,9 @@ for lang in os.listdir(srcdir):
             "title" : lessonData["title"],
             "items" : [convertitem(items[i]) for i in lessonData["items"]],
             "grammar" : lessonData["grammar"],
-            "activities" : grammar + ["waterfall", "vocab"]
+            "activities" : grammar + ["waterfall", "vocab"],
+            "course" : lang,
+            "lesson" : lesson
         }
         savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
 

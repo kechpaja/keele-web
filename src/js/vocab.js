@@ -1,7 +1,6 @@
 var pages = pages || {};
 
 (function () {
-
     var ids = {
         // TODO do we need a class for images? We can just add CSS for images
         // under the image container class. 
@@ -62,7 +61,7 @@ var pages = pages || {};
     }
 
     function init(course, lesson) {
-        load.lesson(course, lesson, assemblePage); 
+        load.load(assemblePage, course, lesson); 
     }
 
     pages.vocab = init;

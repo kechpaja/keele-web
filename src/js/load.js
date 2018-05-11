@@ -1,47 +1,38 @@
 var load = (function () {
+    var data = {};
 
-    var lessonData = null;
-    var homeData = null;
+    // TODO do we need a spinner when loading? 
+    // The generalized version
+    function load(callback, course, lesson) {
+        var url, whichData;
 
-    // TODO consider showing a spinner here when necessary
-    function lesson(course, lesson, callback) {
-         if (lessonData && lessonData.course === course 
-                        && lessonData.lesson === lesson) {
-            callback(lessonData);
-         } else {
-            // TODO error checking and all that jazz
-            fetch("data/" + course + "/lessons/" + lesson + "/lesson.json")
-                .then(function(response) {
-                    return response.json();
-                }).then(function(jsonData) {
-                    lessonData = jsonData;
-
-                    // TODO perhaps these fields should come from server?
-                    lessonData.course = course;
-                    lessonData.lesson = lesson;
-                    callback(lessonData);
-                });
-         }
-    }
-
-    // TODO do we need a spinner?
-    function home(callback) {
-        if (homeData) {
-            callback(homeData);
+        // TODO try and re-write this in fewer lines, but later. 
+        if (lesson) {
+            url = "data/" + course + "/lessons/" + lesson + "/lesson.json";
+            whichData = "lesson";
+        } else if (course) {
+            url = "data/" + course + "/index.json";
+            whichData = "course";
         } else {
-            // TODO error checking, etc.
-            fetch("data/index.json")
-                .then(function(response) {
-                    return response.json();
-                }).then(function(jsonData) {
-                    homeData = jsonData;
-                    callback(homeData);
-                });
+            url = "data/index.json";
+            whichData = "home";
+        }
+
+        if (data[whichData] && (!course || course === data[whichData].course)
+                            && (!lesson || lesson === data[whichData].lesson)) {
+            callback(data[whichData]);
+        } else {
+            // TODO we still have to do error checking here...
+            fetch(url).then(function(response) {
+                        return response.json();
+                    }).then(function(jsonData) {
+                        data[whichData] = jsonData;
+                        callback(data[whichData]);
+                    });
         }
     }
 
     return {
-        home: home,
-        lesson: lesson
+        load: load
     }
 })();

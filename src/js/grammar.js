@@ -20,9 +20,9 @@ var pages = pages || {};
 
 
     function init(course, lesson) {
-        load.lesson(course, lesson, function (data) {
-            assemblePage(data["grammar"])
-        });
+        load.load(function (data) { assemblePage(data["grammar"]); }, 
+                  course, 
+                  lesson);
     }
 
     pages.grammar = init;
