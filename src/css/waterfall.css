@@ -1,4 +1,4 @@
-#answer-field {
+#waterfall-answer-field {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -10,14 +10,14 @@
     height: 2em;
 }
 
-#tile-container {
+#waterfall-tile-container {
     position: relative;
     min-height: 100%;
     margin-bottom: -2em;
     bottom: 2em;
 }
 
-#start-button {
+#waterfall-start-button {
     position: absolute;
     top: 30%;
     width: 100%;
@@ -29,7 +29,7 @@
     background-color: limegreen;
 }
 
-#start-button-text {
+#waterfall-start-button-text {
     color: blue;
     font-size: 3em;
 }
@@ -45,3 +45,13 @@
  *
  * This page also needs stop and back buttons. 
  */
+
+
+.waterfall-tile {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%, 0);
+    max-height: 25%;
+    min-height: 25%;
+}

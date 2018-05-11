@@ -33,6 +33,10 @@ var utils = (function () {
         anchor().appendChild(linkTable);
     }
 
+    function add(element) {
+        anchor().appendChild(element);
+    }
+
     function setTitle(title) {
         document.getElementById("title").innerHTML = title;
         document.getElementById("title-container").style.display = "block";
@@ -53,6 +57,7 @@ var utils = (function () {
     }
 
     return {
+        add: add,
         addLinkTable: addLinkTable,
         anchor: anchor,
         clearAnchor: clearAnchor,

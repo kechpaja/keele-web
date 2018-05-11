@@ -4,38 +4,31 @@ var games = games || {};
     var tickSize = 0.05; // Percentage of page height
     var tickLength = 5; // Milliseconds
 
+    // TODO figure out how to do away with this
     var imageHeight = 25; // Percentage of page height
 
     var ids = {
-        answerField: "answer-field",
-        startButton: "start-button",
-        startButtonText: "start-button-text",
-        tileContainer: "tile-container"
+        answerField: "waterfall-answer-field",
+        startButton: "waterfall-start-button",
+        startButtonText: "waterfall-start-button-text",
+        tileContainer: "waterfall-tile-container"
     };
 
     var lessonData = [];
 
-    // Function to create image tile
-    function createImageTile(src, id) {
-        var image = document.createElement("img");
-        image.src = "data/" + src; // TODO some better way?
-        image.id = id; 
-        image.style.position = "absolute";
-        image.style.left = "50%";
-        image.style.bottom = "100%";
-        image.style.transform = "translate(-50%, 0)";
-        image.style["max-height"] = imageHeight + "%";
-        image.style["min-height"] = imageHeight + "%";
-        return image;
-    }
-
     function setupTiles() {
-        var imageContainer = document.getElementById(ids.tileContainer);
+        var container = document.getElementById(ids.tileContainer);
 
         // TODO scramble tiles beforehand
         for (var i = 0; i < lessonData.length; i++) {
-            var tile = createImageTile(lessonData[i]["image"], i);
-            imageContainer.appendChild(tile);
+            var src = "data/" + lessonData[i].image;
+            container.appendChild(utils.createImage(src, "waterfall-tile", i));
+
+            // Currently, we depend on the style.bottom attribute of the tile 
+            // being set in order to advance it. It's been set in CSS, but
+            // we'll set it again here for now. Maybe there will be some
+            // workaround at some point. 
+            document.getElementById(i).style.bottom = "100%";
         }
     }
 
@@ -110,24 +103,18 @@ var games = games || {};
     // Called when switching context to waterfall
     function init(course, lesson) {
         utils.clearPage();
+        
+        utils.add(utils.createDiv("", ids.tileContainer));
 
-        var tileContainer = document.createElement("div");
-        tileContainer.id = ids.tileContainer
-        anchor.appendChild(tileContainer);
-
-
-        var startButton = document.createElement("button");
-        startButton.id = ids.startButton;
-        startButton.innerHTML = "<div id=\"" + ids.startButtonText + "\">"
+        var startButtonInsides = "<div id=\"" + ids.startButtonText + "\">"
                                    + "Start" + "</div>"; // TODO localize
-        startButton.onclick = runWaterfall;
-        anchor.appendChild(startButton);
+        utils.add(utils.create("button",
+                               startButtonInsides,
+                               {id: ids.startButton, onclick: runWaterfall}));
 
-        var answerField = document.createElement("input");
-        answerField.type = "text";
-        answerField.id = ids.answerField;
-        answerField.onkeypress = checkAnswer;
-        anchor.appendChild(answerField);
+        utils.add(utils.create("input", "", {type: "text",
+                                             id: ids.answerField,
+                                             onkeypress: checkAnswer}));
 
         // TODO error checking if resource doesn't exist
         // TODO add additional logic to convert data in lesson to waterfall
