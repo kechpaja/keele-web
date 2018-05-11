@@ -61,8 +61,7 @@ var pages = (function () {
         // TODO some larger structure to put all of the items into? List?
 
         data.items.forEach(function(item) {
-            var div = "<div class='vocab-item-container'>";
-            div += "<h2>" + item.item + " (" + item.pos + ")</h2>";
+            var div = "<div><h2>" + item.item + " (" + item.pos + ")</h2>";
 
             div += "<p>" + item.translations.join(",") + "</p>";
 
