@@ -46,20 +46,43 @@ var utils = (function () {
         return document.getElementById("anchor");
     }
 
-    // This one hides the title as well
-    function clearPage() {
+
+    function get(element) {
+        if (typeof element === "object") {
+            return element;
+        }
+
+        return document.getElementById(element);
+    }
+
+    function show(element) {
+        get(element).style.display = "block";
+    }
+
+    function hide(element) {
+        get(element).style.display = "none";
+    }
+
+    function hideAll(element) {
         anchor().innerHTML = "";
-        document.getElementById("title-container").style.display = "none";
+        hide("waterfall-anchor");
+    }
+
+    function hideHeader() {
+        hide("title-container"); // TODO expand as there is more header to hide
     }
 
     return {
         add: add,
         addLinkTable: addLinkTable,
-        anchor: anchor,
-        clearPage: clearPage,
         create: create,
         createDiv: createDiv,
         createImage: createImage,
-        setTitle: setTitle
+        get: get,
+        hide: hide,
+        hideAll: hideAll,
+        hideHeader: hideHeader,
+        setTitle: setTitle,
+        show: show
     }
 })();

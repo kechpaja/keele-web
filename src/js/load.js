@@ -8,7 +8,7 @@ var load = (function () {
 
     // TODO do we need a spinner when loading? 
     function load(course, lesson, section) {
-        utils.anchor().innerHTML = ""; // Clear anchor
+        utils.hideAll();
 
         var callback, url, whichData;
 

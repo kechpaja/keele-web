@@ -55,9 +55,7 @@ var games = games || {};
     }
 
     async function runWaterfall() {
-        // Get rid of the start button
-        // TODO consider just hiding it? 
-        document.getElementById(ids.startButton).remove();
+        document.getElementById(ids.startButton).style.display = "none";
 
         // Focus the answer field
         document.getElementById(ids.answerField).focus();
@@ -102,19 +100,16 @@ var games = games || {};
 
     // Called when switching context to waterfall
     function init(course, lesson) {
-        utils.clearPage();
+        utils.hideHeader();
+
+        utils.show("waterfall-anchor");
         
-        utils.add(utils.createDiv("", ids.tileContainer));
+        var startButton = utils.get(ids.startButton);
+        // TODO localize!
+        startButton.getElementsByTagName("div")[0].innerHTML = "Start";
+        startButton.onclick = runWaterfall;
 
-        var startButtonInsides = "<div>"
-                                   + "Start" + "</div>"; // TODO localize
-        utils.add(utils.create("button",
-                               startButtonInsides,
-                               {id: ids.startButton, onclick: runWaterfall}));
-
-        utils.add(utils.create("input", "", {type: "text",
-                                             id: ids.answerField,
-                                             onkeypress: checkAnswer}));
+        document.getElementById(ids.answerField).onkeypress = checkAnswer;
 
         // TODO error checking if resource doesn't exist
         // TODO add additional logic to convert data in lesson to waterfall
