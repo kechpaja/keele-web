@@ -1,23 +1,6 @@
 var navigate = (function () {
-
-    function destinationArray(course, lesson, section) {
-        if (!course) {
-            return [];
-        }
-
-        if (!lesson) {
-            return [course];
-        }
-
-        if (!section) {
-            return [course, lesson];
-        }
-
-        return [course, lesson, section];
-    }
-
     function to(course, lesson, section) {
-        var destination = destinationArray(course, lesson, section);
+        var destination = Array.prototype.slice.call(arguments);
 
         // TODO replace that null?
         history.pushState(destination, null, destination.join("/"));
