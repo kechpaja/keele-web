@@ -21,6 +21,8 @@ var pages = pages || {};
     }
 
     function assemblePage(data) {
+        utils.clearAnchor();
+
         // TODO a title of some sort would be welcome. 
 
 
