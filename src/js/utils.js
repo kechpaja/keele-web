@@ -1,11 +1,4 @@
 var utils = (function () {
-    function createDiv(className, id) {
-        var element = document.createElement("div");
-        element.className = className;
-        element.id = id;
-        return element;
-    }
-
     // getName and getOnClick get name and click function from each element 
     // in items. They each receive both item and index as arguments.
     function addLinkTable(id, items, getName, getOnClick) {
@@ -74,7 +67,6 @@ var utils = (function () {
     return {
         add: add,
         addLinkTable: addLinkTable,
-        createDiv: createDiv,
         get: get,
         getCleared: getCleared,
         hide: hide,
