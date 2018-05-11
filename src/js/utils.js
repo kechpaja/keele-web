@@ -20,20 +20,6 @@ var utils = (function () {
         return image;
     }
 
-    function createLink(name, onclick) {
-        var link = document.createElement("a");
-        link.onclick = onclick;
-        link.innerHTML = name;
-        link.href = "javascript:void(0);";
-
-        var column = document.createElement("td");
-        column.appendChild(link);
-
-        var row = document.createElement("tr");
-        row.appendChild(column);
-        return row;
-    }
-
     // getName and getClickFunction get name and click function from each 
     // element in items. They each receive both item and index as arguments.
     function addLinkTable(id, items, getName, getClickFunction) {
@@ -41,8 +27,16 @@ var utils = (function () {
         linkTable.id = id;
 
         items.forEach(function(item, index) {
-            linkTable.appendChild(createLink(getName(item, index),
-                                             getClickFunction(item, index)));
+            var link = create("a", getName(item, index));
+            link.href = "javascript:void(0);";
+            link.onclick = getClickFunction(item, index);
+
+            var column = document.createElement("td");
+            column.appendChild(link);
+
+            var row = document.createElement("tr");
+            row.appendChild(column);
+            linkTable.appendChild(row);
         });
 
         anchor().appendChild(linkTable);
