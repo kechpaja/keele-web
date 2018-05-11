@@ -1,6 +1,4 @@
-var pages = pages || {};
-
-(function () {
+var pages = (function () {
 
     function displayCourse(data) {
         utils.addLinkTable(
@@ -16,16 +14,11 @@ var pages = pages || {};
                                                             
     }
 
-    pages.course = function (course) {
-        load.load(displayCourse, course);
-    }
-
-
-
 
     function displayGrammar(lessonData) {
         var data = lessonData.grammar;
 
+        // TODO cut this down by appending straight to anchor
         var sections = document.createElement("div");
         sections.id = "grammar-sections";
         utils.anchor().appendChild(sections);
@@ -36,11 +29,6 @@ var pages = pages || {};
             sections.appendChild(div);
         });
     }
-
-    pages.grammar = function (course, lesson) {
-        load.load(displayGrammar, course, lesson);
-    };
-
 
 
     function displayHome(data) {
@@ -55,12 +43,6 @@ var pages = pages || {};
                 }; 
             });
     }
-
-    pages.home = function () {
-        load.load(displayHome);
-    }
-
-
 
 
     function displayLesson(data) {
@@ -84,21 +66,12 @@ var pages = pages || {};
             });
     }
 
-    pages.lesson = function (course, lesson) {
-        load.load(displayLesson, course, lesson);
-    }
-
-
-
 
     function displayVocab(data) {
-
         // TODO some larger structure to put all of the items into? List?
 
         data.items.forEach(function(item) {
             var div = utils.createDiv("vocab-item-container");
-
-            // Item as heading
             div.appendChild(utils.create("h2", item.item));
            
             // Translation in following paragraph
@@ -108,7 +81,6 @@ var pages = pages || {};
             // or something like that at some point. 
             div.appendChild(utils.create("p", item.translations.join(",")));
 
-            // Add all images in their own container
             var container = utils.createDiv("vocab-image-container");
             item.images.forEach(function(imageUrl) {
                 container.append(utils.createImage("data/" + imageUrl,
@@ -123,8 +95,11 @@ var pages = pages || {};
         })
     }
 
-    pages.vocab = function (course, lesson) {
-        load.load(displayVocab, course, lesson); 
+    return {
+        course: displayCourse,
+        grammar: displayGrammar,
+        home: displayHome,
+        lesson: displayLesson,
+        vocab: displayVocab
     }
-
 })();

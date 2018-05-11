@@ -2,7 +2,7 @@ var load = (function () {
     var data = {};
 
     function wrapAssemblePage(callback, pageData) {
-        utils.setTitle(pageData.title || "Keelek");
+        utils.setTitle(pageData.title || "Keelek"); // TODO loc?
         callback(pageData);
     }
 
@@ -40,7 +40,30 @@ var load = (function () {
         }
     }
 
+    function loadPage(course, lesson, section) {
+        utils.clearAnchor(); // XXX here? Clear anchor as soon as we know that
+                             // we're navigating somewhere else.
+
+        if (lesson) {
+            // TODO change this to easier way when waterfall has been updated
+            // games[section] || pages[section] || pages.lesson
+            if (section in games) {
+                games[section](course, lesson);
+            } else {
+                load(pages[section] || pages.lesson, course, lesson);
+            }
+            return;
+        }
+
+        if (course) {
+            load(pages.course, course);
+            return;
+        }
+
+        load(pages.home);
+    }
+
     return {
-        load: load
+        loadPage: loadPage
     }
 })();

@@ -1,5 +1,3 @@
-var pages = pages || {};
-
 var navigate = (function () {
 
     function destinationArray(course, lesson, section) {
@@ -18,29 +16,12 @@ var navigate = (function () {
         return [course, lesson, section];
     }
 
-    function loadPage(course, lesson, section) {
-        utils.clearAnchor(); // XXX here? Clear anchor as soon as we know that
-                             // we're navigating somewhere else.
-
-        if (lesson) {
-            (pages[section] || games[section] || pages.lesson)(course, lesson);
-            return;
-        }
-
-        if (course) {
-            pages.course(course);
-            return;
-        }
-
-        pages.home();
-    }
-
     function to(course, lesson, section) {
         var destination = destinationArray(course, lesson, section);
 
         // TODO replace that null?
         history.pushState(destination, null, destination.join("/"));
-        loadPage(course, lesson, section);
+        load.loadPage(course, lesson, section);
     }
 
 
@@ -50,13 +31,13 @@ var navigate = (function () {
 
         // TODO something in place of that null?
         history.replaceState(currentPathSplit, null, currentPath);
-        loadPage.apply(this, currentPathSplit); 
+        load.loadPage.apply(this, currentPathSplit); 
     }
 
     // Set up the popstate handler
     window.addEventListener('popstate', function(e) {
         if (e.state) {
-            loadPage.apply(this, e.state);
+            load.loadPage.apply(this, e.state);
         }
     });
 
