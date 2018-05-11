@@ -27,6 +27,14 @@ def savejson(filename, obj):
         json.dump(obj, f)
 
 
+def convertitem(item):
+    newitem = {}
+    for k in item:
+        newitem[k] = item[k]
+    newitem["images"] = ["images/" + img for img in item["images"]]
+    return newitem
+
+
 ###
 # The Script Itself
 ###
@@ -96,8 +104,12 @@ for lang in os.listdir(srcdir):
         grammar = ["grammar"] if "grammar" in lessonData else []
         # TODO as we get more activities, make sure we accurately determine
         # TODO which ones are actually supported
-        lessonPageObject = {"title" : lessonData["title"],
-                            "activities" : grammar + ["waterfall"]}
+        # TODO consider just having the person writing the lesson specify
+        lessonPageObject = {
+            "title" : lessonData["title"],
+            "items" : [convertitem(items[i]) for i in lessonData["items"]],
+            "activities" : grammar + ["waterfall", "vocab"]
+        }
         savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
 
 

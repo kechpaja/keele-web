@@ -43,7 +43,7 @@ var navigate = (function () {
 
 
     function loadCurrentPage() {
-        var currentPath = location.pathname.replace(/(\/?keele)?\//, "");
+        var currentPath = location.pathname.replace(/(\/?keelek)?\//, "");
         var currentPathSplit = currentPath.split("/");
 
         // TODO something in place of that null?

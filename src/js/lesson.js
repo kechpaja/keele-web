@@ -31,8 +31,10 @@ var pages = pages || {};
 
         // TODO vocab page and other games
         // TODO localize page names
+        // TODO Or just replace with icons? Or get names from titles.
         var pageNames = {
             "grammar" : "Grammar",
+            "vocab" : "Vocabulary",
             "waterfall" : "Waterfall"
         };
 
