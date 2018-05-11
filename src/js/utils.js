@@ -1,23 +1,20 @@
 var utils = (function () {
-    function create(tagName, innerHTML) {
+    // TODO let this take an object as innerHTML?
+    function create(tagName, innerHTML, properties) {
         var element = document.createElement(tagName);
-        element.innerHTML = innerHTML;
+        element.innerHTML = innerHTML || "";
+        for (var property in properties) {
+            element[property] = properties[property];
+        }
         return element;
     }
 
     function createDiv(className, id) {
-        var element = document.createElement("div");
-        element.className = className || "";
-        element.id = id || "";
-        return element;
+        return create("div", "", {className: className, id: id});
     }
 
     function createImage(src, className, id) {
-        var image = document.createElement("img");
-        image.src = src || "";
-        image.className = className || "";
-        image.id = id || "";
-        return image;
+        return create("img", "", {className: className, id: id, src: src});
     }
 
     // getName and getOnClick get name and click function from each element 

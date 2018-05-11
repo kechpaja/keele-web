@@ -1,5 +1,4 @@
 var pages = (function () {
-
     function displayCourse(data) {
         utils.addLinkTable(
             "lesson-list",
@@ -11,25 +10,14 @@ var pages = (function () {
                     navigate.to(data.course, item.id); 
                 };
             });
-                                                            
     }
 
-
-    function displayGrammar(lessonData) {
-        var data = lessonData.grammar;
-
-        // TODO cut this down by appending straight to anchor
-        var sections = document.createElement("div");
-        sections.id = "grammar-sections";
-        utils.anchor().appendChild(sections);
-
-        data.sections.forEach(function(sec) {
-            var div = document.createElement("div");
-            div.innerHTML = "<h2>" + sec.heading + "</h2>" + sec.content;
-            sections.appendChild(div);
+    function displayGrammar(data) {
+        data.grammar.sections.forEach(function(section) {
+            var insides = "<h2>" + section.title + "</h2>" + section.content;
+            utils.anchor().appendChild(utils.create("div", insides));
         });
     }
-
 
     function displayHome(data) {
         utils.addLinkTable(
@@ -43,7 +31,6 @@ var pages = (function () {
                 }; 
             });
     }
-
 
     function displayLesson(data) {
         // TODO other games
