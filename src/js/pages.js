@@ -61,27 +61,22 @@ var pages = (function () {
         // TODO some larger structure to put all of the items into? List?
 
         data.items.forEach(function(item) {
-            var div = utils.createDiv("vocab-item-container");
-            utils.add(div, "<h2>" + item.item + "</h2>");
+            var div = "<div class='vocab-item-container'>";
+            div += "<h2>" + item.item + " (" + item.pos + ")</h2>";
 
-            // Translation in following paragraph
-            // TODO part-of-speech information?
-            // TODO joining with commas will work for words, but what
-            // about longer phrases? Perhaps we can encase them in <em> tags
-            // or something like that at some point. 
-            utils.add(div, "<p>" + item.translations.join(",") + "</p>");
+            div += "<p>" + item.translations.join(",") + "</p>";
 
-            var container = utils.createDiv("vocab-image-container");
+            div += "<div class='vocab-image-container'>";
             item.images.forEach(function(imgUrl) {
-                utils.add(container, "<img src='data/" + imgUrl + "'></img>");
+                div += "<img src='data/" + imgUrl + "'></img>";
             });
-            div.appendChild(container);
+            div += "</div>";
 
             // TODO Add all audio items (when they are ready), again
             // probably in their own container
 
-            utils.add(anchor, div);
-        })
+            utils.add(anchor, div + "</div>");
+        });
     }
 
     return {
@@ -90,5 +85,5 @@ var pages = (function () {
         home: displayHome,
         lesson: displayLesson,
         vocab: displayVocab
-    }
+    };
 })();
