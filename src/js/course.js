@@ -2,17 +2,15 @@ var pages = pages || {};
 
 (function () {
     function assemblePage(data) {
-        utils.clearAnchor();
-
-        utils.setTitle(data.title);
-
         utils.addLinkTable(
             "lesson-list",
             data.lessons,
             function (item) { return item.title; },
             function (item) {
-                var id = item.id;
-                return function () { navigate.to(data.course, id); }
+                return function () {
+                    utils.setTitle(item.title); // Change title ASAP
+                    navigate.to(data.course, item.id); 
+                };
             });
                                                             
     }

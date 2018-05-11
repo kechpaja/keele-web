@@ -2,9 +2,8 @@ var pages = pages || {};
 
 (function () {
     function assemblePage(data) {
-        utils.clearAnchor();
-
-        utils.setTitle(data.title);
+        //utils.setTitle(data.title); // XXX this one needs this, but 
+        // since we're getting rid of it 
 
         // TODO vocab page and other games
         // TODO localize page names
@@ -20,7 +19,10 @@ var pages = pages || {};
             data.activities,
             function (item) { return pageNames[item]; },
             function (item) {
-                return function () { 
+                //var data = data;
+                //var item = item;
+                return function () {
+                    //utils.setTitle(pageNames[item]);
                     navigate.to(data.course, data.lesson, item);
                 };
             });

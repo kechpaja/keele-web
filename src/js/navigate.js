@@ -19,6 +19,9 @@ var navigate = (function () {
     }
 
     function loadPage(course, lesson, section) {
+        utils.clearAnchor(); // XXX here? Clear anchor as soon as we know that
+                             // we're navigating somewhere else.
+
         if (lesson) {
             (pages[section] || pages["lesson"])(course, lesson);
             return;
@@ -47,6 +50,8 @@ var navigate = (function () {
 
         // TODO something in place of that null?
         history.replaceState(currentPathSplit, null, currentPath);
+
+        // TODO do we want to show some title ASAP here? 
         loadPage.apply(this, currentPathSplit); 
     }
 

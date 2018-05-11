@@ -2,10 +2,6 @@ var pages = pages || {};
 
 (function () {
     function assemblePage(data) {
-        utils.clearAnchor();
-
-        utils.setTitle(data.title);
-
         var sections = document.createElement("div");
         sections.id = "grammar-sections";
         utils.anchor().appendChild(sections);

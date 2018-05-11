@@ -1,6 +1,11 @@
 var load = (function () {
     var data = {};
 
+    function wrapAssemblePage(callback, pageData) {
+        utils.setTitle(pageData.title || "Keelek");
+        callback(pageData);
+    }
+
     // TODO do we need a spinner when loading? 
     // The generalized version
     function load(callback, course, lesson) {
@@ -14,20 +19,23 @@ var load = (function () {
             url = "data/" + course + "/index.json";
             whichData = "course";
         } else {
+            // Set title pre-emptively, as this is the one case where it
+            // is not going to be handled elsewhere. 
+            utils.setTitle("Keelek"); // TODO loc this?
             url = "data/index.json";
             whichData = "home";
         }
 
         if (data[whichData] && (!course || course === data[whichData].course)
                             && (!lesson || lesson === data[whichData].lesson)) {
-            callback(data[whichData]);
+            wrapAssemblePage(callback, data[whichData]);
         } else {
             // TODO we still have to do error checking here...
             fetch(url).then(function(response) {
                         return response.json();
                     }).then(function(jsonData) {
                         data[whichData] = jsonData;
-                        callback(data[whichData]);
+                        wrapAssemblePage(callback, data[whichData]);
                     });
         }
     }

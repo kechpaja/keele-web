@@ -12,10 +12,6 @@ var pages = pages || {};
     }
 
     function assemblePage(data) {
-        utils.clearAnchor();
-
-        // TODO localize that string!
-        utils.setTitle("Vocabulary");
 
         // TODO some larger structure to put all of the items into? List?
 
