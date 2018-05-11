@@ -3,24 +3,15 @@ var utils = (function () {
     // in items. They each receive both item and index as arguments.
     function addLinkTable(id, items, getName, getOnClick) {
         var linkTable = getCleared(id);
-
         items.forEach(function(item, index) {
             var li = document.createElement("li");
 
             // TODO eventually "getName(item, index)" will just be item.title
-            li.innerHTML = "<a href='javascript:void(0);'>" 
-                                                + getName(item, index) + "</a>";
+            li.innerHTML += "<a href='javascript:void(0);'>"
+                                               + getName(item, index) + "</a>";
             li.onclick = getOnClick(item, index);
-            add(linkTable, li);
+            linkTable.appendChild(li);
         });
-    }
-
-    function add(target, element) {
-        if (typeof element === "object") {
-            get(target).appendChild(element);
-        } else {
-            get(target).innerHTML += element;
-        }
     }
 
     function setTitle(title) {
@@ -32,7 +23,6 @@ var utils = (function () {
         if (typeof element === "object") {
             return element;
         }
-
         return document.getElementById(element);
     }
 
@@ -51,13 +41,9 @@ var utils = (function () {
         get(element).style.display = "none";
     }
 
-    function hideAll(element) {
-        hide("course-anchor");
-        hide("grammar-anchor");
-        hide("home-anchor");
-        hide("lesson-anchor");
-        hide("vocab-anchor");
-        hide("waterfall-anchor");
+    function hideAll() {
+        ["course-anchor", "grammar-anchor", "home-anchor", "lesson-anchor",
+         "vocab-anchor", "waterfall-anchor"].forEach(hide);
     }
 
     function hideHeader() {
@@ -65,7 +51,6 @@ var utils = (function () {
     }
 
     return {
-        add: add,
         addLinkTable: addLinkTable,
         get: get,
         getCleared: getCleared,

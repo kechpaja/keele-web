@@ -15,8 +15,8 @@ var pages = (function () {
     function displayGrammar(data) {
         var div = utils.getCleared("grammar-anchor");
         data.grammar.sections.forEach(function(section) {
-            utils.add(div, "<div><h2>" + section.title + "</h2>" 
-                                       + section.content + "</div>");
+            div.innerHTML += "<div><h2>" + section.title + "</h2>" 
+                                         + section.content + "</div>";
         });
     }
 
@@ -74,7 +74,7 @@ var pages = (function () {
             // TODO Add all audio items (when they are ready), again
             // probably in their own container
 
-            utils.add(anchor, div + "</div>");
+            anchor.innerHTML += div + "</div>";
         });
     }
 
