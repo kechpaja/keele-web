@@ -21,7 +21,7 @@ var navigate = (function () {
 
         // TODO replace that null?
         history.pushState(destination, null, destination.join("/"));
-        load.loadPage(course, lesson, section);
+        load(course, lesson, section);
     }
 
 
@@ -31,13 +31,13 @@ var navigate = (function () {
 
         // TODO something in place of that null?
         history.replaceState(currentPathSplit, null, currentPath);
-        load.loadPage.apply(this, currentPathSplit); 
+        load.apply(this, currentPathSplit); 
     }
 
     // Set up the popstate handler
     window.addEventListener('popstate', function(e) {
         if (e.state) {
-            load.loadPage.apply(this, e.state);
+            load.apply(this, e.state);
         }
     });
 

@@ -7,21 +7,33 @@ var load = (function () {
     }
 
     // TODO do we need a spinner when loading? 
-    // The generalized version
-    function load(callback, course, lesson) {
-        var url, whichData;
+    function load(course, lesson, section) {
+        utils.clearAnchor(); // XXX here? Clear anchor as soon as we know that
+                             // we're navigating somewhere else.
+
+        var callback, url, whichData;
 
         // TODO try and re-write this in fewer lines, but later. 
         if (lesson) {
+            if (section in games) {
+                games[section](course, lesson);
+                return; // Nothing more to do here, for now at least
+            } else {
+                callback = pages[section] || pages.lesson;
+            }
+
             url = "data/" + course + "/lessons/" + lesson + "/lesson.json";
             whichData = "lesson";
         } else if (course) {
+            callback = pages.course;
             url = "data/" + course + "/index.json";
             whichData = "course";
         } else {
             // Set title pre-emptively, as this is the one case where it
-            // is not going to be handled elsewhere. 
+            // is not going to be handled elsewhere when there is data to load. 
             utils.setTitle("Keelek"); // TODO loc this?
+
+            callback = pages.home;
             url = "data/index.json";
             whichData = "home";
         }
@@ -40,30 +52,5 @@ var load = (function () {
         }
     }
 
-    function loadPage(course, lesson, section) {
-        utils.clearAnchor(); // XXX here? Clear anchor as soon as we know that
-                             // we're navigating somewhere else.
-
-        if (lesson) {
-            // TODO change this to easier way when waterfall has been updated
-            // games[section] || pages[section] || pages.lesson
-            if (section in games) {
-                games[section](course, lesson);
-            } else {
-                load(pages[section] || pages.lesson, course, lesson);
-            }
-            return;
-        }
-
-        if (course) {
-            load(pages.course, course);
-            return;
-        }
-
-        load(pages.home);
-    }
-
-    return {
-        loadPage: loadPage
-    }
+    return load;
 })();
