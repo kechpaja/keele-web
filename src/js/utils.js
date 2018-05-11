@@ -1,16 +1,9 @@
 var utils = (function () {
-    // TODO let this take an object as innerHTML?
-    function create(tagName, innerHTML, properties) {
-        var element = document.createElement(tagName);
-        element.innerHTML = innerHTML || "";
-        for (var property in properties) {
-            element[property] = properties[property];
-        }
-        return element;
-    }
-
     function createDiv(className, id) {
-        return create("div", "", {className: className, id: id});
+        var element = document.createElement("div");
+        element.className = className;
+        element.id = id;
+        return element;
     }
 
     // getName and getOnClick get name and click function from each element 
@@ -42,11 +35,6 @@ var utils = (function () {
         document.getElementById("title-container").style.display = "block";
     }
 
-    function anchor() {
-        return document.getElementById("anchor");
-    }
-
-
     function get(element) {
         if (typeof element === "object") {
             return element;
@@ -71,7 +59,6 @@ var utils = (function () {
     }
 
     function hideAll(element) {
-        anchor().innerHTML = "";
         hide("course-anchor");
         hide("grammar-anchor");
         hide("home-anchor");
