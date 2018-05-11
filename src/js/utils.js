@@ -16,7 +16,7 @@ var utils = (function () {
 
     // getName and getClickFunction get name and click function from each 
     // element in items. They each receive both item and index as arguments.
-    function createLinkTable(id, items, getName, getClickFunction) {
+    function addLinkTable(id, items, getName, getClickFunction) {
         var linkTable = document.createElement("table");
         linkTable.id = id;
 
@@ -25,7 +25,7 @@ var utils = (function () {
                                              getClickFunction(item, index)));
         });
 
-        return linkTable;
+        anchor().appendChild(linkTable);
     }
 
     function setTitle(title) {
@@ -48,10 +48,10 @@ var utils = (function () {
     }
 
     return {
+        addLinkTable: addLinkTable,
         anchor: anchor,
         clearAnchor: clearAnchor,
         clearPage: clearPage,
-        createLinkTable: createLinkTable,
         setTitle: setTitle
     }
 })();

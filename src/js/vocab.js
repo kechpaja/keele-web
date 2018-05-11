@@ -1,18 +1,10 @@
 var pages = pages || {};
 
 (function () {
-    var ids = {
-        // TODO do we need a class for images? We can just add CSS for images
-        // under the image container class. 
-        imageClass: "vocab-image-class",
-        imageContainerClass: "vocab-image-container",
-        itemContainerClass: "vocab-item-container"
-    };
-
     function createImage(src) {
         var image = document.createElement("img");
         image.src = "data/" + src;
-        image.className = ids.imageClass;
+        image.className = "vocab-image-class";
 
         // TODO any other important fields?
 
@@ -27,13 +19,13 @@ var pages = pages || {};
 
         // TODO some larger structure to put all of the items into? List?
 
-        data["items"].forEach(function(item) {
+        data.items.forEach(function(item) {
             var div = document.createElement("div");
-            div.className = ids.itemContainerClass
+            div.className = "vocab-item-container";
 
             // Item as heading
             var heading = document.createElement("h2");
-            heading.innerHTML = item["item"];
+            heading.innerHTML = item.item;
             div.appendChild(heading);
            
             // Translation in following paragraph
@@ -42,13 +34,13 @@ var pages = pages || {};
             // TODO joining with commas will work for words, but what
             // about longer phrases? Perhaps we can encase them in <em> tags
             // or something like that at some point. 
-            translation.innerHTML = item["translations"].join(", ");
+            translation.innerHTML = item.translations.join(", ");
             div.appendChild(translation);
 
             // Add all images in their own container
             var imageContainer = document.createElement("div");
-            imageContainer.className = ids.imageContainerClass;
-            item["images"].forEach(function(imageUrl) {
+            imageContainer.className = "vocab-image-container";
+            item.images.forEach(function(imageUrl) {
                 imageContainer.appendChild(createImage(imageUrl));
             });
             div.appendChild(imageContainer);

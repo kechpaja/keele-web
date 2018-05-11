@@ -1,14 +1,10 @@
 var pages = pages || {};
 
 (function () {
-    var ids = {
-        sectionList: "section-list"
-    };
-
     function assemblePage(data) {
         utils.clearAnchor();
 
-        utils.setTitle(data["title"]);
+        utils.setTitle(data.title);
 
         // TODO vocab page and other games
         // TODO localize page names
@@ -19,16 +15,15 @@ var pages = pages || {};
             "waterfall" : "Waterfall"
         };
 
-        utils.anchor().appendChild(
-            utils.createLinkTable(
-                ids.sectionList,
-                data["activities"],
-                function (item) { return pageNames[item]; },
-                function (item) {
-                    return function () { 
-                        navigate.to(data.course, data.lesson, item);
-                    };
-                }));
+        utils.addLinkTable(
+            "section-list",
+            data.activities,
+            function (item) { return pageNames[item]; },
+            function (item) {
+                return function () { 
+                    navigate.to(data.course, data.lesson, item);
+                };
+            });
     }
 
     function init(course, lesson) {
