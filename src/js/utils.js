@@ -28,11 +28,10 @@ var utils = (function () {
         return linkTable;
     }
 
-    function createTitle(id, title) {
-        var titleElement = document.createElement("div");
-        titleElement.id = id + "-container";
-        titleElement.innerHTML = "<h1 id=\"" + id + "\">" + title + "</h1>";
-        return titleElement;
+    function setTitle(title) {
+        var titleElement = document.getElementById("title");
+        titleElement.innerHTML = title;
+        titleElement.style.display = "block";
     }
 
     function anchor() {
@@ -43,10 +42,17 @@ var utils = (function () {
         anchor().innerHTML = "";
     }
 
+    // This one hides the title as well
+    function clearPage() {
+        clearAnchor();
+        document.getElementById("title-container").style.display = "none";
+    }
+
     return {
         anchor: anchor,
         clearAnchor: clearAnchor,
+        clearPage: clearPage,
         createLinkTable: createLinkTable,
-        createTitle: createTitle
+        setTitle: setTitle
     }
 })();

@@ -109,8 +109,7 @@ var pages = pages || {};
 
     // Called when switching context to waterfall
     function init(language, lesson) {
-        var anchor = document.getElementById("anchor");
-        anchor.innerHTML = "";
+        utils.clearPage();
 
         var tileContainer = document.createElement("div");
         tileContainer.id = ids.tileContainer

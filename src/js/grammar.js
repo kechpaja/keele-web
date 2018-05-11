@@ -5,14 +5,9 @@ var pages = pages || {};
     var data = {};
 
     function assemblePage() {
-        // Create title and grammar-sections elements
-        var anchor = document.getElementById("anchor");
-        anchor.innerHTML = "";
-        
-        var title = document.createElement("h1");
-        title.id = "title";
-        title.innerHTML = data["title"];
-        anchor.appendChild(title);
+        utils.clearAnchor();
+
+        utils.setTitle(data["title"]);
 
         var sections = document.createElement("div");
         sections.id = "grammar-sections";

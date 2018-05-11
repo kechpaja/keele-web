@@ -6,3 +6,18 @@ html {
 body {
     margin: 0 0 0 0;
 }
+
+
+/* Page Titles */
+
+#title {
+    color: blue;
+    margin: 0 0 0 0;
+    text-align: center;
+}
+
+#title-container {
+    background-color: yellow;
+    position: relative;
+    padding: 0.5em;
+}

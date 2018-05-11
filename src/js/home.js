@@ -3,15 +3,14 @@ var pages = pages || {};
 (function () {
 
     var ids = {
-        courseList: "home-course-list",
-        title: "home-page-title" // TODO should probably have a common title?
+        courseList: "home-course-list"
     };
 
     function assemblePage(data) {
         utils.clearAnchor();
 
         // TODO should we loc that string?
-        utils.anchor().appendChild(utils.createTitle(ids.title, "Keelek"));
+        utils.setTitle("Keelek");
 
         utils.anchor().appendChild(
             utils.createLinkTable(

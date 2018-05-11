@@ -5,29 +5,13 @@ var pages = pages || {};
     var data = {};
 
     var ids = {
-        sectionList: "section-list",
-        title: "lesson-title"
+        sectionList: "section-list"
     };
-
-    // Returns a table row containing a link
-    function createLink(name, onclick) {
-        var link = document.createElement("a");
-        link.onclick = onclick;
-        link.innerHTML = name;
-        link.href = "javascript:void(0);";
-
-        var column = document.createElement("td");
-        column.appendChild(link);
-
-        var row = document.createElement("tr");
-        row.appendChild(column);
-        return row;
-    }
 
     function assemblePage() {
         utils.clearAnchor();
 
-        utils.anchor().appendChild(utils.createTitle(ids.title, data["title"]));
+        utils.setTitle(data["title"]);
 
         // TODO vocab page and other games
         // TODO localize page names

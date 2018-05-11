@@ -6,13 +6,12 @@ var pages = pages || {};
 
     var ids = {
         lessonList: "lesson-list",
-        title: "course-title"
     };
 
     function assemblePage() {
         utils.clearAnchor();
 
-        utils.anchor().appendChild(utils.createTitle(ids.title, data["title"]));
+        utils.setTitle(data["title"]);
 
         utils.anchor().appendChild(
             utils.createLinkTable(
