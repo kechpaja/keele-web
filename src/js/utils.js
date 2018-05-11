@@ -29,9 +29,8 @@ var utils = (function () {
     }
 
     function setTitle(title) {
-        var titleElement = document.getElementById("title");
-        titleElement.innerHTML = title;
-        titleElement.style.display = "block";
+        document.getElementById("title").innerHTML = title;
+        document.getElementById("title-container").style.display = "block";
     }
 
     function anchor() {
