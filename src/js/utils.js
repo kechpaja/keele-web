@@ -33,8 +33,12 @@ var utils = (function () {
         anchor().appendChild(linkTable);
     }
 
-    function add(element) {
-        anchor().appendChild(element);
+    function add(target, element) {
+        if (typeof element === "object") {
+            get(target).appendChild(element);
+        } else {
+            get(target).innerHTML += element;
+        }
     }
 
     function setTitle(title) {
@@ -55,6 +59,13 @@ var utils = (function () {
         return document.getElementById(element);
     }
 
+    function getCleared(element) {
+        var elem = get(element);
+        show(elem);
+        elem.innerHTML = "";
+        return elem;
+    }
+
     function show(element) {
         get(element).style.display = "block";
     }
@@ -65,6 +76,8 @@ var utils = (function () {
 
     function hideAll(element) {
         anchor().innerHTML = "";
+        hide("grammar-anchor");
+        hide("vocab-anchor");
         hide("waterfall-anchor");
     }
 
@@ -79,6 +92,7 @@ var utils = (function () {
         createDiv: createDiv,
         createImage: createImage,
         get: get,
+        getCleared: getCleared,
         hide: hide,
         hideAll: hideAll,
         hideHeader: hideHeader,

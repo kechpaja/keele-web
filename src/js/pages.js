@@ -13,9 +13,10 @@ var pages = (function () {
     }
 
     function displayGrammar(data) {
+        var div = utils.getCleared("grammar-anchor");
         data.grammar.sections.forEach(function(section) {
-            var insides = "<h2>" + section.title + "</h2>" + section.content;
-            utils.add(utils.create("div", insides));
+            utils.add(div, "<div><h2>" + section.title + "</h2>" 
+                                       + section.content + "</div>");
         });
     }
 
@@ -55,6 +56,8 @@ var pages = (function () {
 
 
     function displayVocab(data) {
+        var anchor = utils.getCleared("vocab-anchor");
+
         // TODO some larger structure to put all of the items into? List?
 
         data.items.forEach(function(item) {
@@ -66,19 +69,18 @@ var pages = (function () {
             // TODO joining with commas will work for words, but what
             // about longer phrases? Perhaps we can encase them in <em> tags
             // or something like that at some point. 
-            div.appendChild(utils.create("p", item.translations.join(",")));
+            utils.add(div, "<p>" + item.translations.join(",") + "</p>");
 
             var container = utils.createDiv("vocab-image-container");
-            item.images.forEach(function(imageUrl) {
-                container.append(utils.createImage("data/" + imageUrl,
-                                                   "vocab-image-class"));
+            item.images.forEach(function(imgUrl) {
+                utils.add(container, "<img src='data/" + imgUrl + "'></img>");
             });
             div.appendChild(container);
 
             // TODO Add all audio items (when they are ready), again
             // probably in their own container
 
-            utils.add(div);
+            utils.add(anchor, div);
         })
     }
 
