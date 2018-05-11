@@ -8,8 +8,7 @@ var load = (function () {
 
     // TODO do we need a spinner when loading? 
     function load(course, lesson, section) {
-        utils.clearAnchor(); // XXX here? Clear anchor as soon as we know that
-                             // we're navigating somewhere else.
+        utils.anchor().innerHTML = ""; // Clear anchor
 
         var callback, url, whichData;
 

@@ -46,13 +46,9 @@ var utils = (function () {
         return document.getElementById("anchor");
     }
 
-    function clearAnchor() {
-        anchor().innerHTML = "";
-    }
-
     // This one hides the title as well
     function clearPage() {
-        clearAnchor();
+        anchor().innerHTML = "";
         document.getElementById("title-container").style.display = "none";
     }
 
@@ -60,7 +56,6 @@ var utils = (function () {
         add: add,
         addLinkTable: addLinkTable,
         anchor: anchor,
-        clearAnchor: clearAnchor,
         clearPage: clearPage,
         create: create,
         createDiv: createDiv,
