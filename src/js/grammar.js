@@ -2,9 +2,7 @@ var pages = pages || {};
 
 (function () {
     
-    var data = {};
-
-    function assemblePage() {
+    function assemblePage(data) {
         utils.clearAnchor();
 
         utils.setTitle(data["title"]);
@@ -22,14 +20,9 @@ var pages = pages || {};
 
 
     function init(language, lesson) {
-        // TODO error handling: fall back to nearest lesson page?
-        fetch("data/" + language + "/lessons/" + lesson + "/grammar.json")
-            .then(function(response) {
-                return response.json();
-            }).then(function(jsonData) {
-                data = jsonData;
-                assemblePage();
-            });
+        load.lesson(language, lesson, function (data) {
+            assemblePage(data["grammar"])
+        });
     }
 
     pages.grammar = init;

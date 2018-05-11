@@ -88,7 +88,7 @@ for lang in os.listdir(srcdir):
         # save grammar page separately
         lessondir = lang + "/lessons/" + lesson
         os.makedirs(destdir + "/" + lessondir)
-        savejson(destdir+"/"+lessondir+"/grammar.json",lessonData["grammar"])
+        #savejson(destdir+"/"+lessondir+"/grammar.json",lessonData["grammar"])
 
         # create waterfall data object
         temp = {}
@@ -112,6 +112,7 @@ for lang in os.listdir(srcdir):
         lessonPageObject = {
             "title" : lessonData["title"],
             "items" : [convertitem(items[i]) for i in lessonData["items"]],
+            "grammar" : lessonData["grammar"],
             "activities" : grammar + ["waterfall", "vocab"]
         }
         savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)

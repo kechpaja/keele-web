@@ -130,6 +130,8 @@ var pages = pages || {};
         anchor.appendChild(answerField);
 
         // TODO error checking if resource doesn't exist
+        // TODO add additional logic to convert data in lesson to waterfall
+        // data. Currently, we store both separately on the server. 
         fetch("data/" + language + "/lessons/" + lesson + "/waterfall.json")
             .then(function(response) {
                 return response.json();

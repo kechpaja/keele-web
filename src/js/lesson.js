@@ -2,13 +2,11 @@ var pages = pages || {};
 
 (function () {
 
-    var data = {};
-
     var ids = {
         sectionList: "section-list"
     };
 
-    function assemblePage() {
+    function assemblePage(data) {
         utils.clearAnchor();
 
         utils.setTitle(data["title"]);
@@ -35,19 +33,7 @@ var pages = pages || {};
     }
 
     function init(language, lesson) {
-        // TODO cache this, or at least only do it if it hasn't alreay happened
-        // TODO error handling
-        fetch("data/" + language + "/lessons/" + lesson + "/lesson.json")
-            .then(function(response) {
-                return response.json();
-            }).then(function(jsonData) {
-                data = jsonData;
-                data.language = language;
-                data.lesson = lesson;
-                assemblePage();
-            });
-
-        // TODO show a spinner or something
+        load.lesson(language, lesson, assemblePage);
     }
 
     pages.lesson = init;
