@@ -10,7 +10,6 @@ var games = games || {};
     var ids = {
         answerField: "waterfall-answer-field",
         startButton: "waterfall-start-button",
-        startButtonText: "waterfall-start-button-text",
         tileContainer: "waterfall-tile-container"
     };
 
@@ -21,14 +20,14 @@ var games = games || {};
 
         // TODO scramble tiles beforehand
         for (var i = 0; i < lessonData.length; i++) {
-            var src = "data/" + lessonData[i].image;
-            container.appendChild(utils.createImage(src, "waterfall-tile", i));
+            var image = utils.createImage("data/" + lessonData[i].image, "", i);
 
             // Currently, we depend on the style.bottom attribute of the tile 
             // being set in order to advance it. It's been set in CSS, but
             // we'll set it again here for now. Maybe there will be some
             // workaround at some point. 
-            document.getElementById(i).style.bottom = "100%";
+            image.style.bottom = "100%";
+            container.appendChild(image);
         }
     }
 
@@ -57,6 +56,7 @@ var games = games || {};
 
     async function runWaterfall() {
         // Get rid of the start button
+        // TODO consider just hiding it? 
         document.getElementById(ids.startButton).remove();
 
         // Focus the answer field
@@ -106,7 +106,7 @@ var games = games || {};
         
         utils.add(utils.createDiv("", ids.tileContainer));
 
-        var startButtonInsides = "<div id=\"" + ids.startButtonText + "\">"
+        var startButtonInsides = "<div>"
                                    + "Start" + "</div>"; // TODO localize
         utils.add(utils.create("button",
                                startButtonInsides,
