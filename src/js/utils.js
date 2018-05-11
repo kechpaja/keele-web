@@ -20,20 +20,17 @@ var utils = (function () {
         return image;
     }
 
-    // getName and getClickFunction get name and click function from each 
-    // element in items. They each receive both item and index as arguments.
-    function addLinkTable(id, items, getName, getClickFunction) {
+    // getName and getOnClick get name and click function from each element 
+    // in items. They each receive both item and index as arguments.
+    function addLinkTable(id, items, getName, getOnClick) {
         var linkTable = document.createElement("ul");
         linkTable.id = id;
 
         items.forEach(function(item, index) {
-            var link = create("a", getName(item, index));
-            link.href = "javascript:void(0);";
-            link.onclick = getClickFunction(item, index);
-
-            var row = document.createElement("li");
-            row.appendChild(link);
-            linkTable.appendChild(row);
+            var li = create("li", "<a href='javascript:void(0);'>" 
+                                        + getName(item, index) + "</a>");
+            li.getElementsByTagName("a")[0].onclick = getOnClick(item, index);
+            linkTable.appendChild(li);
         });
 
         anchor().appendChild(linkTable);
