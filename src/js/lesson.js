@@ -27,13 +27,13 @@ var pages = pages || {};
                 function (item) { return pageNames[item]; },
                 function (item) {
                     return function () { 
-                        navigate.to(data.language, data.lesson, item);
+                        navigate.to(data.course, data.lesson, item);
                     };
                 }));
     }
 
-    function init(language, lesson) {
-        load.lesson(language, lesson, assemblePage);
+    function init(course, lesson) {
+        load.lesson(course, lesson, assemblePage);
     }
 
     pages.lesson = init;

@@ -4,20 +4,20 @@ var load = (function () {
     var homeData = null;
 
     // TODO consider showing a spinner here when necessary
-    function lesson(language, lesson, callback) {
-         if (lessonData && lessonData.language === language 
+    function lesson(course, lesson, callback) {
+         if (lessonData && lessonData.course === course 
                         && lessonData.lesson === lesson) {
             callback(lessonData);
          } else {
             // TODO error checking and all that jazz
-            fetch("data/" + language + "/lessons/" + lesson + "/lesson.json")
+            fetch("data/" + course + "/lessons/" + lesson + "/lesson.json")
                 .then(function(response) {
                     return response.json();
                 }).then(function(jsonData) {
                     lessonData = jsonData;
 
                     // TODO perhaps these fields should come from server?
-                    lessonData.language = language;
+                    lessonData.course = course;
                     lessonData.lesson = lesson;
                     callback(lessonData);
                 });

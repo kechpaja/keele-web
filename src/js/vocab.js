@@ -61,8 +61,8 @@ var pages = pages || {};
         })
     }
 
-    function init(language, lesson) {
-        load.lesson(language, lesson, assemblePage); 
+    function init(course, lesson) {
+        load.lesson(course, lesson, assemblePage); 
     }
 
     pages.vocab = init;

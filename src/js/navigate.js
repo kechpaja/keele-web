@@ -2,42 +2,42 @@ var pages = pages || {};
 
 var navigate = (function () {
 
-    function destinationArray(language, lesson, section) {
-        if (!language) {
+    function destinationArray(course, lesson, section) {
+        if (!course) {
             return [];
         }
 
         if (!lesson) {
-            return [language];
+            return [course];
         }
 
         if (!section) {
-            return [language, lesson];
+            return [course, lesson];
         }
 
-        return [language, lesson, section];
+        return [course, lesson, section];
     }
 
-    function loadPage(language, lesson, section) {
+    function loadPage(course, lesson, section) {
         if (lesson) {
-            (pages[section] || pages["lesson"])(language, lesson);
+            (pages[section] || pages["lesson"])(course, lesson);
             return;
         }
 
-        if (language) {
-            pages["course"](language);
+        if (course) {
+            pages["course"](course);
             return;
         }
 
         pages["home"]();
     }
 
-    function to(language, lesson, section) {
-        var destination = destinationArray(language, lesson, section);
+    function to(course, lesson, section) {
+        var destination = destinationArray(course, lesson, section);
 
         // TODO replace that null?
         history.pushState(destination, null, destination.join("/"));
-        loadPage(language, lesson, section);
+        loadPage(course, lesson, section);
     }
 
 

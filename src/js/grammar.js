@@ -19,8 +19,8 @@ var pages = pages || {};
     }
 
 
-    function init(language, lesson) {
-        load.lesson(language, lesson, function (data) {
+    function init(course, lesson) {
+        load.lesson(course, lesson, function (data) {
             assemblePage(data["grammar"])
         });
     }

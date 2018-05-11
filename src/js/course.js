@@ -20,19 +20,19 @@ var pages = pages || {};
                 function (item) { return item["title"]; },
                 function (item) {
                     var id = item["id"];
-                    return function () { navigate.to(data.language, id); } 
+                    return function () { navigate.to(data.course, id); } 
                 }));
                                                             
     }
 
-    function init(language) {
+    function init(course) {
         // TODO error checking, caching, etc.
-        fetch("data/" + language + "/index.json")
+        fetch("data/" + course + "/index.json")
             .then(function(response) {
                 return response.json();
             }).then(function(jsonData) {
                 data = jsonData;
-                data.language = language;
+                data.course = course;
                 assemblePage();
             });
     }

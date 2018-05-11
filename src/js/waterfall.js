@@ -108,7 +108,7 @@ var pages = pages || {};
 
 
     // Called when switching context to waterfall
-    function init(language, lesson) {
+    function init(course, lesson) {
         utils.clearPage();
 
         var tileContainer = document.createElement("div");
@@ -132,7 +132,7 @@ var pages = pages || {};
         // TODO error checking if resource doesn't exist
         // TODO add additional logic to convert data in lesson to waterfall
         // data. Currently, we store both separately on the server. 
-        fetch("data/" + language + "/lessons/" + lesson + "/waterfall.json")
+        fetch("data/" + course + "/lessons/" + lesson + "/waterfall.json")
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
