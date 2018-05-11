@@ -1,7 +1,7 @@
 var pages = (function () {
     function displayCourse(data) {
         utils.addLinkTable(
-            "lesson-list",
+            "course-anchor",
             data.lessons,
             function (item) { return item.title; },
             function (item) {
@@ -22,7 +22,7 @@ var pages = (function () {
 
     function displayHome(data) {
         utils.addLinkTable(
-            "home-course-list",
+            "home-anchor",
             data,
             function (item) { return item.title; },
             function (item) { 
@@ -44,7 +44,7 @@ var pages = (function () {
         };
 
         utils.addLinkTable(
-            "section-list",
+            "lesson-anchor",
             data.activities,
             function (item) { return pageNames[item]; },
             function (item) {

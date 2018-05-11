@@ -16,9 +16,7 @@ var utils = (function () {
     // getName and getOnClick get name and click function from each element 
     // in items. They each receive both item and index as arguments.
     function addLinkTable(id, items, getName, getOnClick) {
-        // TODO list can probably be added to index.html
-        var linkTable = document.createElement("ul");
-        linkTable.id = id;
+        var linkTable = getCleared(id);
 
         items.forEach(function(item, index) {
             var li = document.createElement("li");
@@ -29,8 +27,6 @@ var utils = (function () {
             li.onclick = getOnClick(item, index);
             add(linkTable, li);
         });
-
-        anchor().appendChild(linkTable);
     }
 
     function add(target, element) {
@@ -76,7 +72,10 @@ var utils = (function () {
 
     function hideAll(element) {
         anchor().innerHTML = "";
+        hide("course-anchor");
         hide("grammar-anchor");
+        hide("home-anchor");
+        hide("lesson-anchor");
         hide("vocab-anchor");
         hide("waterfall-anchor");
     }
