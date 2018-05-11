@@ -4,16 +4,19 @@
 
  () Figure out vocab page, from ground zero.
 
- () Scaling of waterfall page on mobile, so that it doesn't get
-    blown out of proporition when the user opens their keyboard
+ () Scaling of waterfall page on mobile, so that it doesn't get blown out of
+    proporition when the user opens their keyboard
+
+ () Decide whether we want to keep the title on the waterfall page, and only
+    get rid of it when the start button is pressed
+
+ () Audio on the vocab page. Really, audio in general. 
 
  - Questions
 
 What other games should we have? I have an idea for one other: select the
 correct picture given a word, possibly with a time limit. This could also be
 arranged as a waterfall. 
-
-We will also have to have the vocabulary page with items, pictures, and audio. 
 
 Perhaps a game where the user has to identify a word from the audio only. One
 where they have to type, and another where they have to select a picture. 
