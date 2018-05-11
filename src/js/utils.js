@@ -23,7 +23,7 @@ var utils = (function () {
     // getName and getClickFunction get name and click function from each 
     // element in items. They each receive both item and index as arguments.
     function addLinkTable(id, items, getName, getClickFunction) {
-        var linkTable = document.createElement("table");
+        var linkTable = document.createElement("ul");
         linkTable.id = id;
 
         items.forEach(function(item, index) {
@@ -31,11 +31,8 @@ var utils = (function () {
             link.href = "javascript:void(0);";
             link.onclick = getClickFunction(item, index);
 
-            var column = document.createElement("td");
-            column.appendChild(link);
-
-            var row = document.createElement("tr");
-            row.appendChild(column);
+            var row = document.createElement("li");
+            row.appendChild(link);
             linkTable.appendChild(row);
         });
 
