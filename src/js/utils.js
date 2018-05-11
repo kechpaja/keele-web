@@ -1,4 +1,24 @@
 var utils = (function () {
+    function create(tagName, innerHTML) {
+        var element = document.createElement(tagName);
+        element.innerHTML = innerHTML;
+        return element;
+    }
+
+    function createDiv(className, id) {
+        var element = document.createElement("div");
+        element.className = className || "";
+        element.id = id || "";
+        return element;
+    }
+
+    function createImage(src, className, id) {
+        var image = document.createElement("img");
+        image.src = src || "";
+        image.className = className || "";
+        image.id = id || "";
+        return image;
+    }
 
     function createLink(name, onclick) {
         var link = document.createElement("a");
@@ -52,6 +72,9 @@ var utils = (function () {
         anchor: anchor,
         clearAnchor: clearAnchor,
         clearPage: clearPage,
+        create: create,
+        createDiv: createDiv,
+        createImage: createImage,
         setTitle: setTitle
     }
 })();
