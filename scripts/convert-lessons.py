@@ -54,7 +54,8 @@ images = os.listdir(srcdir + "/images")
 for image in images:
     shutil.copy2(srcdir + "/images/" + image, destdir + "/images")
 
-# TODO create index of languages
+# create index of languages
+courseindex = []
 
 for lang in os.listdir(srcdir):
     if lang == "images": # images are not a lesson pack
@@ -71,6 +72,9 @@ for lang in os.listdir(srcdir):
 
     # get list of lessons
     index = getjson(langsrcdir + "index.json")
+
+    # Add to index of courses
+    courseindex.append({"id" : lang, "title" : index["title"]})
 
     # Start creating new index
     newindex = {"title" : index["title"], "lessons" : []}
@@ -112,10 +116,10 @@ for lang in os.listdir(srcdir):
         }
         savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
 
-
-        # TODO eventually create vocab page (we need to know what it looks like)
-
         # TODO copy audio as well at some point?
 
     # Save new index
     savejson(destdir + "/" + lang + "/index.json", newindex)
+
+# Save new course index
+savejson(destdir + "/index.json", courseindex)

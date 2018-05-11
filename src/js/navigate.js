@@ -29,8 +29,7 @@ var navigate = (function () {
             return;
         }
 
-        // TODO handle cases without lesson or language
-        // TODO this will mean writing the index home page
+        pages["home"]();
     }
 
     function to(language, lesson, section) {

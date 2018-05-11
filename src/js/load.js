@@ -1,6 +1,7 @@
 var load = (function () {
 
     var lessonData = null;
+    var homeData = null;
 
     // TODO consider showing a spinner here when necessary
     function lesson(language, lesson, callback) {
@@ -23,7 +24,24 @@ var load = (function () {
          }
     }
 
+    // TODO do we need a spinner?
+    function home(callback) {
+        if (homeData) {
+            callback(homeData);
+        } else {
+            // TODO error checking, etc.
+            fetch("data/index.json")
+                .then(function(response) {
+                    return response.json();
+                }).then(function(jsonData) {
+                    homeData = jsonData;
+                    callback(homeData);
+                });
+        }
+    }
+
     return {
+        home: home,
         lesson: lesson
     }
 })();

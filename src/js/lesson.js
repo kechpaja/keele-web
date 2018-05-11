@@ -46,7 +46,7 @@ var pages = pages || {};
                 function (item) {
                     return function () { 
                         navigate.to(data.language, data.lesson, item);
-                    }
+                    };
                 }));
     }
 
