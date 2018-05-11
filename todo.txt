@@ -2,15 +2,16 @@
 
  () stop and/or pause buttons for waterfall game
 
- () Figure out vocab page, from ground zero.
-
  () Scaling of waterfall page on mobile, so that it doesn't get blown out of
     proporition when the user opens their keyboard
 
  () Decide whether we want to keep the title on the waterfall page, and only
     get rid of it when the start button is pressed
 
- () Audio on the vocab page. Really, audio in general. 
+ () Audio on the vocab page. Really, audio in general.
+
+ () Fix htaccess bug that's preventing urls with slashes at the end from
+    working
 
  - Questions
 
