@@ -13,21 +13,21 @@ var utils = (function () {
         return create("div", "", {className: className, id: id});
     }
 
-    function createImage(src, className, id) {
-        return create("img", "", {className: className, id: id, src: src});
-    }
-
     // getName and getOnClick get name and click function from each element 
     // in items. They each receive both item and index as arguments.
     function addLinkTable(id, items, getName, getOnClick) {
+        // TODO list can probably be added to index.html
         var linkTable = document.createElement("ul");
         linkTable.id = id;
 
         items.forEach(function(item, index) {
-            var li = create("li", "<a href='javascript:void(0);'>" 
-                                        + getName(item, index) + "</a>");
-            li.getElementsByTagName("a")[0].onclick = getOnClick(item, index);
-            linkTable.appendChild(li);
+            var li = document.createElement("li");
+
+            // TODO eventually "getName(item, index)" will just be item.title
+            li.innerHTML = "<a href='javascript:void(0);'>" 
+                                                + getName(item, index) + "</a>";
+            li.onclick = getOnClick(item, index);
+            add(linkTable, li);
         });
 
         anchor().appendChild(linkTable);
@@ -88,9 +88,7 @@ var utils = (function () {
     return {
         add: add,
         addLinkTable: addLinkTable,
-        create: create,
         createDiv: createDiv,
-        createImage: createImage,
         get: get,
         getCleared: getCleared,
         hide: hide,

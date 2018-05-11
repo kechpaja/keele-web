@@ -16,19 +16,16 @@ var games = games || {};
     var lessonData = [];
 
     function setupTiles() {
-        var container = utils.get(ids.tileContainer);
-        container.innerHTML = ""; // Make sure container is clear
+        var div = utils.getCleared(ids.tileContainer);
 
         // TODO scramble tiles beforehand
         for (var i = 0; i < lessonData.length; i++) {
-            var image = utils.createImage("data/" + lessonData[i].image, "", i);
-
             // Currently, we depend on the style.bottom attribute of the tile 
             // being set in order to advance it. It's been set in CSS, but
             // we'll set it again here for now. Maybe there will be some
             // workaround at some point. 
-            image.style.bottom = "100%";
-            container.appendChild(image);
+            utils.add(div, "<img src='data/" + lessonData[i].image
+                            + "' style='bottom: 100%' id='" + i + "'></img>");
         }
     }
 

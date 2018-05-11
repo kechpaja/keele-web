@@ -62,8 +62,8 @@ var pages = (function () {
 
         data.items.forEach(function(item) {
             var div = utils.createDiv("vocab-item-container");
-            div.appendChild(utils.create("h2", item.item));
-           
+            utils.add(div, "<h2>" + item.item + "</h2>");
+
             // Translation in following paragraph
             // TODO part-of-speech information?
             // TODO joining with commas will work for words, but what
