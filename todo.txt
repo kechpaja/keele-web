@@ -16,6 +16,8 @@
  () Service workers and other PWA stuff. Then consider removing our own
     primitive attempts at caching. 
 
+ () Update script to avoid doing all the unnecessary transforms we currently do
+
  - Questions
 
 What other games should we have? I have an idea for one other: select the

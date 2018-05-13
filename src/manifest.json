@@ -1,0 +1,17 @@
+{
+    "short_name" : "Keelek",
+    "name" : "Keelek: Easy Electronic Language Education and Knowledge",
+    "icons" : [
+        {
+            "src" : "icon-48x48.png",
+            "type" : "image/png",
+            "sizes" : "48x48"
+        },
+        {
+            "src" : "icon-96x96.png",
+            "type" : "image/png",
+            "sizes" : "96x96"
+        }
+    ],
+    "start_url" : "/"
+}
