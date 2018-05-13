@@ -1,0 +1,7 @@
+<svg height="1024" width="1024">
+    <rect x="0" y="0" height="1024" width="1024" fill="yellow"></rect>
+    <line x1="200" y1="137" x2="200" y2="887" stroke-linecap="round" stroke="blue" stroke-width="150"></line>
+    <line x1="474" y1="362" x2="624" y2="137" stroke-linecap="round" stroke="blue" stroke-width="150"></line>
+    <line x1="574" y1="662" x2="824" y2="437" stroke-linecap="round" stroke="blue" stroke-width="150"></line>
+    <line x1="574" y1="662" x2="824" y2="887" stroke-linecap="round" stroke="blue" stroke-width="150"></line>
+</svg>
