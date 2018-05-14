@@ -18,6 +18,8 @@
 
  () Update script to avoid doing all the unnecessary transforms we currently do
 
+ () Consider creating script to automatically generate manifest
+
  - Questions
 
 What other games should we have? I have an idea for one other: select the
