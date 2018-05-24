@@ -18,7 +18,7 @@ var load = (function () {
                 games[section](course, lesson);
                 return; // Nothing more to do here, for now at least
             } else {
-                callback = pages[section] || pages.lesson;
+                callback = pages[section] || pages.grammar;
             }
 
             url = "data/" + course + "/lessons/" + lesson + "/lesson.json";

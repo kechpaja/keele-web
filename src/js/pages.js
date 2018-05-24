@@ -1,4 +1,12 @@
 var pages = (function () {
+    function displaySectionsBar(data) {
+        ["grammar", "vocab", "games", "texts"].forEach(function(buttonName) {
+            utils.get(buttonName + "-button").onclick = function () {
+                navigate.to(data.course, data.lesson, buttonName);
+            }
+        });
+    }
+
     function displayCourse(data) {
         utils.addLinkTable(
             "course-anchor",
@@ -13,6 +21,8 @@ var pages = (function () {
     }
 
     function displayGrammar(data) {
+        displaySectionsBar(data);
+
         var div = utils.getCleared("grammar-anchor");
         data.grammar.sections.forEach(function(section) {
             div.innerHTML += "<div><h2>" + section.title + "</h2>" 
@@ -34,6 +44,8 @@ var pages = (function () {
     }
 
     function displayLesson(data) {
+        displaySectionsBar(data);
+
         // TODO other games
         // TODO localize page names
         // TODO Or just replace with icons? Or get names from titles.
@@ -56,6 +68,8 @@ var pages = (function () {
 
 
     function displayVocab(data) {
+        displaySectionsBar(data);
+
         var anchor = utils.getCleared("vocab-anchor");
 
         // TODO some larger structure to put all of the items into? List?
