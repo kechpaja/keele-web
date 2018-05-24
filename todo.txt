@@ -20,6 +20,13 @@
 
  () Consider creating script to automatically generate manifest
 
+ () Figure out how to do elipsis on title so it fits on mobile, or just get rid
+    of it and replace it with name/logo.
+
+ () Arrows for back and forth through lessons in header bar
+
+ () Lesson and course select dialogs
+
  - Questions
 
 What other games should we have? I have an idea for one other: select the
