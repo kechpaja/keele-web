@@ -43,30 +43,6 @@ var pages = (function () {
             });
     }
 
-    function displayLesson(data) {
-        displaySectionsBar(data);
-
-        // TODO other games
-        // TODO localize page names
-        // TODO Or just replace with icons? Or get names from titles.
-        var pageNames = {
-            "grammar" : "Grammar",
-            "vocab" : "Vocabulary",
-            "waterfall" : "Waterfall"
-        };
-
-        utils.addLinkTable(
-            "lesson-anchor",
-            data.activities,
-            function (item) { return pageNames[item]; },
-            function (item) {
-                return function () {
-                    navigate.to(data.course, data.lesson, item);
-                };
-            });
-    }
-
-
     function displayVocab(data) {
         displaySectionsBar(data);
 
@@ -96,7 +72,6 @@ var pages = (function () {
         course: displayCourse,
         grammar: displayGrammar,
         home: displayHome,
-        lesson: displayLesson,
         vocab: displayVocab
     };
 })();
