@@ -14,14 +14,60 @@ ul {
 
 /* Page Titles */
 
+#title-container {
+    display: block;
+    background-color: yellow;
+    margin: 0 0 0 0;
+    font-size: 30pt;
+    height: 1.2em;
+    position: relative;
+}
+
 #title {
     color: blue;
+    float: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0.2em;
+}
+
+#grammar-button {
+    background-color: blue;
+    color: cyan;
     margin: 0 0 0 0;
+    float: right;
+    height: 100%;
+    width: 1.2em;
     text-align: center;
 }
 
-#title-container {
-    background-color: yellow;
-    position: relative;
-    padding: 0.5em;
+#vocab-button {
+    background-color: green;
+    color: chartreuse;
+    margin: 0 0 0 0;
+    float: right;
+    height:100%;
+    width: 1.2em;
+    text-align: center;
+}
+
+#games-button {
+    background-color: red;
+    color: pink;
+    margin: 0 0 0 0;
+    float: right;
+    height: 100%;
+    width: 1.2em;
+    text-align: center;
+}
+
+#texts-button {
+    background-color: black;
+    color: gray;
+    margin: 0 0 0 0;
+    float: right;
+    height: 100%;
+    width: 1.2em;
+    text-align: center;
 }
