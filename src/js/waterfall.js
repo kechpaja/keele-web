@@ -96,6 +96,48 @@ var games = games || {};
     }
 
 
+    // Munge data into shape for waterfall game, and then call setupTiles()
+    function mungeData(data) {
+        // TODO
+        // for item in lessonData["items"]:
+        //   for image in items[item]["images"]:
+        //     if image in temp:
+        //       temp[image].append(items[item]["item"])
+        //     else:
+        //       temp[image] = [items[item]["item"]]
+        // waterfalldata = []
+        // for image in temp:
+        //   waterfalldata.append({"image" : image,
+        //                         "answers" : temp[image]})
+        //
+
+
+        // TODO munge data into waterfall-able format
+        //
+        //
+
+        // TODO make sure this actually works, of course. 
+        var temp = {};
+        data.forEach(function(item) {
+            item["images"].forEach(function(image) {
+                if (image in temp) {
+                    temp[image][temp[image].length] = item["item"];
+                } else {
+                    temp[image] = [item["item"]];
+                }
+            });
+        });
+
+        lessonData = [];
+        for (image in temp) {
+            mungedData[mungedData.length] = {"image" : image, 
+                                             "answers" : temp[image]};
+        }
+
+        setupTiles();
+    }
+
+
     // Called when switching context to waterfall
     function init(course, lesson) {
         utils.hideHeader();
@@ -113,12 +155,11 @@ var games = games || {};
         // TODO error checking if resource doesn't exist
         // TODO add additional logic to convert data in lesson to waterfall
         // data. Currently, we store both separately on the server. 
-        fetch("data/" + course + "/lessons/" + lesson + "/waterfall.json")
+        fetch("data/" + course + "/lessons/" + lesson + "/lesson.json")
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
-                lessonData = data;
-                setupTiles();
+                mungeData(data);
             });
     }
 

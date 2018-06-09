@@ -32,6 +32,7 @@ def convertitem(item):
     for k in item:
         newitem[k] = item[k]
     newitem["images"] = ["images/" + img for img in item["images"]]
+    # TODO probably have to do the same for audio eventually
     return newitem
 
 
@@ -63,13 +64,6 @@ for lang in os.listdir(srcdir):
 
     langsrcdir = srcdir + "/" + lang + "/"
 
-    # get items
-    items = getjson(langsrcdir + "items.json")
-
-    # Copy index of lessons
-    #os.makedirs(destdir + "/" + lang)
-    #shutil.copy2(langsrcdir + "index.json", destdir + "/" + lang)
-
     # get list of lessons
     index = getjson(langsrcdir + "index.json")
 
@@ -78,7 +72,9 @@ for lang in os.listdir(srcdir):
 
     # Start creating new index
     newindex = {"title" : index["title"], "course" : lang, "lessons" : []}
-    
+   
+    # Make lessons dir
+    os.makedirs(destdir + "/" + lang + "/lessons")
     for lesson in index["lessons"]:
         lessonData = getjson(langsrcdir + "lessons/" + lesson + ".json")
 
@@ -88,32 +84,12 @@ for lang in os.listdir(srcdir):
         # save grammar page separately
         lessondir = lang + "/lessons/" + lesson
         os.makedirs(destdir + "/" + lessondir)
-        #savejson(destdir+"/"+lessondir+"/grammar.json",lessonData["grammar"])
-
-        # create waterfall data object
-        temp = {}
-        for item in lessonData["items"]:
-            for image in items[item]["images"]:
-                if image in temp:
-                    temp[image].append(items[item]["item"])
-                else:
-                    temp[image] = [items[item]["item"]]
-        waterfalldata = []
-        for image in temp:
-            waterfalldata.append({"image" : "images/" + image, 
-                                  "answers" : temp[image]})
-        savejson(destdir + "/" + lessondir + "/waterfall.json", waterfalldata)
 
         # create lesson page object and save
-        grammar = ["grammar"] if "grammar" in lessonData else []
-        # TODO as we get more activities, make sure we accurately determine
-        # TODO which ones are actually supported
-        # TODO consider just having the person writing the lesson specify
         lessonPageObject = {
             "title" : lessonData["title"],
             "items" : [convertitem(items[i]) for i in lessonData["items"]],
             "grammar" : lessonData["grammar"],
-            "activities" : grammar + ["waterfall", "vocab"],
             "course" : lang,
             "lesson" : lesson
         }
