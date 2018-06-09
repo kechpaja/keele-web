@@ -32,6 +32,10 @@ ul {
     margin-left: 0.2em;
 }
 
+#title-container > a {
+    text-decoration: none;
+}
+
 #grammar-button {
     background-color: blue;
     color: cyan;
