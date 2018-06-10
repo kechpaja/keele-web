@@ -88,7 +88,7 @@ for lang in os.listdir(srcdir):
         # create lesson page object and save
         lessonPageObject = {
             "title" : lessonData["title"],
-            "items" : [convertitem(items[i]) for i in lessonData["items"]],
+            "items" : [convertitem(item) for item in lessonData["items"]],
             "grammar" : lessonData["grammar"],
             "course" : lang,
             "lesson" : lesson

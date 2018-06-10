@@ -118,7 +118,7 @@ var games = games || {};
 
         // TODO make sure this actually works, of course. 
         var temp = {};
-        data.forEach(function(item) {
+        data["items"].forEach(function(item) {
             item["images"].forEach(function(image) {
                 if (image in temp) {
                     temp[image][temp[image].length] = item["item"];
@@ -130,7 +130,7 @@ var games = games || {};
 
         lessonData = [];
         for (image in temp) {
-            mungedData[mungedData.length] = {"image" : image, 
+            lessonData[lessonData.length] = {"image" : image, 
                                              "answers" : temp[image]};
         }
 
