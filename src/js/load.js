@@ -15,8 +15,7 @@ var load = (function () {
         // TODO try and re-write this in fewer lines, but later. 
         if (lesson) {
             if (section in games) {
-                games[section](course, lesson);
-                return; // Nothing more to do here, for now at least
+                callback = games[section]
             } else {
                 callback = pages[section] || pages.grammar;
             }

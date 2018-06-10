@@ -98,25 +98,6 @@ var games = games || {};
 
     // Munge data into shape for waterfall game, and then call setupTiles()
     function mungeData(data) {
-        // TODO
-        // for item in lessonData["items"]:
-        //   for image in items[item]["images"]:
-        //     if image in temp:
-        //       temp[image].append(items[item]["item"])
-        //     else:
-        //       temp[image] = [items[item]["item"]]
-        // waterfalldata = []
-        // for image in temp:
-        //   waterfalldata.append({"image" : image,
-        //                         "answers" : temp[image]})
-        //
-
-
-        // TODO munge data into waterfall-able format
-        //
-        //
-
-        // TODO make sure this actually works, of course. 
         var temp = {};
         data["items"].forEach(function(item) {
             item["images"].forEach(function(image) {
@@ -139,7 +120,7 @@ var games = games || {};
 
 
     // Called when switching context to waterfall
-    function init(course, lesson) {
+    function init(data) {
         utils.hideHeader();
 
         utils.show("waterfall-anchor");
@@ -152,15 +133,7 @@ var games = games || {};
 
         document.getElementById(ids.answerField).onkeypress = checkAnswer;
 
-        // TODO error checking if resource doesn't exist
-        // TODO add additional logic to convert data in lesson to waterfall
-        // data. Currently, we store both separately on the server. 
-        fetch("data/" + course + "/lessons/" + lesson + ".json")
-            .then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                mungeData(data);
-            });
+        mungeData(data);
     }
 
     games.waterfall = init;
