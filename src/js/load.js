@@ -21,7 +21,7 @@ var load = (function () {
                 callback = pages[section] || pages.grammar;
             }
 
-            url = "data/" + course + "/lessons/" + lesson + "/lesson.json";
+            url = "data/" + course + "/lessons/" + lesson + ".json";
             whichData = "lesson";
         } else if (course) {
             callback = pages.course;

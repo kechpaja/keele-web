@@ -14,18 +14,14 @@ import shutil
 import sys
 
 
-# Load JSON file
 def getjson(filename):
     with open(filename, "r") as f:
         data = json.load(f)
     return data
 
-
-# Save JSON file
 def savejson(filename, obj):
     with open(filename, "w") as f:
         json.dump(obj, f)
-
 
 def convertitem(item):
     newitem = {}
@@ -39,8 +35,6 @@ def convertitem(item):
 ###
 # The Script Itself
 ###
-
-
 if len(sys.argv) != 3:
     print("Requires two arguments")
     exit(1)
@@ -50,6 +44,7 @@ destdir = sys.argv[2]
 
 
 # Move images
+# TODO move audio here too eventually
 os.makedirs(destdir + "/images")
 images = os.listdir(srcdir + "/images")
 for image in images:
@@ -64,41 +59,25 @@ for lang in os.listdir(srcdir):
 
     langsrcdir = srcdir + "/" + lang + "/"
 
-    # get list of lessons
     index = getjson(langsrcdir + "index.json")
-
-    # Add to index of courses
     courseindex.append({"id" : lang, "title" : index["title"]})
 
     # Start creating new index
     newindex = {"title" : index["title"], "course" : lang, "lessons" : []}
    
-    # Make lessons dir
-    os.makedirs(destdir + "/" + lang + "/lessons")
+    lessonsDir = destdir + "/" + lang + "/lessons"
+    os.makedirs(lessonsDir)
     for lesson in index["lessons"]:
         lessonData = getjson(langsrcdir + "lessons/" + lesson + ".json")
-
-        # Get title for index
         newindex["lessons"].append({"id":lesson, "title":lessonData["title"]})
-
-        # save grammar page separately
-        lessondir = lang + "/lessons/" + lesson
-        os.makedirs(destdir + "/" + lessondir)
-
-        # create lesson page object and save
-        lessonPageObject = {
+        savejson(lessonsDir + "/" + lesson + ".json", {
             "title" : lessonData["title"],
             "items" : [convertitem(item) for item in lessonData["items"]],
             "grammar" : lessonData["grammar"],
             "course" : lang,
             "lesson" : lesson
-        }
-        savejson(destdir + "/" + lessondir + "/lesson.json", lessonPageObject)
+        })
 
-        # TODO copy audio as well at some point?
-
-    # Save new index
     savejson(destdir + "/" + lang + "/index.json", newindex)
 
-# Save new course index
 savejson(destdir + "/index.json", courseindex)

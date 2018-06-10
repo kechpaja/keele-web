@@ -155,7 +155,7 @@ var games = games || {};
         // TODO error checking if resource doesn't exist
         // TODO add additional logic to convert data in lesson to waterfall
         // data. Currently, we store both separately on the server. 
-        fetch("data/" + course + "/lessons/" + lesson + "/lesson.json")
+        fetch("data/" + course + "/lessons/" + lesson + ".json")
             .then(function(response) {
                 return response.json();
             }).then(function(data) {
