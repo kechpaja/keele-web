@@ -42,8 +42,8 @@ var utils = (function () {
     }
 
     function hideAll() {
-        ["course-anchor", "grammar-anchor", "home-anchor", "vocab-anchor", 
-         "waterfall-anchor"].forEach(hide);
+        ["course-anchor", "games-anchor", "grammar-anchor", "home-anchor", 
+         "vocab-anchor", "waterfall-anchor"].forEach(hide);
     }
 
     function hideHeader() {

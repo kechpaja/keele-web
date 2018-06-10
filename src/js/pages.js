@@ -20,6 +20,21 @@ var pages = (function () {
             });
     }
 
+    function displayGames(data) {
+        displaySectionsBar(data);
+
+        utils.addLinkTable(
+            "games-anchor",
+            ["waterfall"], // TODO localize next line
+            function (item) { return {"waterfall" : "Waterfall"}[item]; },
+            function (item) {
+                return function () {
+                    utils.setTitle(item.title); // TODO Maybe not?
+                    navigate.to(data.course, data.lesson, "waterfall");
+                };
+            });
+    }
+
     function displayGrammar(data) {
         displaySectionsBar(data);
 
@@ -70,6 +85,7 @@ var pages = (function () {
 
     return {
         course: displayCourse,
+        games: displayGames,
         grammar: displayGrammar,
         home: displayHome,
         vocab: displayVocab
