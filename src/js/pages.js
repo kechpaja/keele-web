@@ -68,7 +68,7 @@ var pages = (function () {
         data.items.forEach(function(item) {
             var div = "<div><h2>" + item.item + " (" + item.pos + ")</h2>";
 
-            div += "<p>" + item.translations.join(",") + "</p>";
+            div += "<p>" + item.translations.join(", ") + "</p>";
 
             div += "<div class='vocab-image-container'>";
             item.images.forEach(function(imgUrl) {
