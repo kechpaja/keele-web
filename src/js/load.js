@@ -14,12 +14,7 @@ var load = (function () {
 
         // TODO try and re-write this in fewer lines, but later. 
         if (lesson) {
-            if (section in games) {
-                callback = games[section]
-            } else {
-                callback = pages[section] || pages.grammar;
-            }
-
+            callback = games[section] || pages[section] || pages.grammar;
             url = "data/" + course + "/lessons/" + lesson + ".json";
             whichData = "lesson";
         } else if (course) {
