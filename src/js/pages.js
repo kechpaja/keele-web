@@ -58,6 +58,17 @@ var pages = (function () {
             });
     }
 
+    function displayTexts(data) {
+        displaySectionsBar(data);
+
+        var anchor = utils.getCleared("texts-anchor");
+
+        data.texts.forEach(function(text) {
+            var div = "<div><h2>" + text.title + "</h2><p>" + text.body;
+            anchor.innerHTML += div + "</p></div>";
+        });
+    }
+
     function displayVocab(data) {
         displaySectionsBar(data);
 
@@ -88,6 +99,7 @@ var pages = (function () {
         games: displayGames,
         grammar: displayGrammar,
         home: displayHome,
+        texts: displayTexts,
         vocab: displayVocab
     };
 })();

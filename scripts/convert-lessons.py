@@ -74,6 +74,7 @@ for lang in os.listdir(srcdir):
             "title" : lessonData["title"],
             "items" : [convertitem(item) for item in lessonData["items"]],
             "grammar" : lessonData["grammar"],
+            "texts" : lessonData["texts"] if lessonData["texts"] else [],
             "course" : lang,
             "lesson" : lesson
         })
